@@ -3,6 +3,7 @@ import { connectDB } from "@/lib/mongoose";
 import BlogPostModel from "@/models/BlogPost";
 import { BlogPost } from "@/types";
 import Link from "next/link";
+import AddBlogPostButton from "./AddBlogPostButton";
 
 async function getPosts(): Promise<BlogPost[]> {
   try {
@@ -21,9 +22,12 @@ export default async function BlogPage() {
 
   return (
     <div className="min-h-screen bg-base-100">
-      <div className="bg-sky-800 dark:bg-sky-950 text-white py-10 sm:py-16 px-4 text-center">
+      <div className="bg-sky-800 dark:bg-sky-950 text-white py-10 sm:py-16 px-4 text-center relative">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3">Travel Blog</h1>
         <p className="text-sky-100 text-base sm:text-lg">Inspiration, tips, and guides for every kind of traveler</p>
+        <div className="mt-5">
+          <AddBlogPostButton />
+        </div>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 py-12">

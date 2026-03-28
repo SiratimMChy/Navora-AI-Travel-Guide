@@ -10,7 +10,7 @@ export const destinationController = {
     if (search) query.title = { $regex: search, $options: "i" };
     if (category) query.category = category;
 
-    let sortObj: Record<string, SortOrder> = { createdAt: -1 };
+    let sortObj: Record<string, SortOrder> = { rating: -1 };
     if (sort === "price_asc") sortObj = { price: 1 };
     if (sort === "price_desc") sortObj = { price: -1 };
     if (sort === "rating") sortObj = { rating: -1 };

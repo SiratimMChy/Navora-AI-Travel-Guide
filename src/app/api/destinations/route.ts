@@ -11,7 +11,9 @@ export async function GET(req: NextRequest) {
       page: parseInt(searchParams.get("page") || "1"),
       limit: searchParams.get("limit") ? parseInt(searchParams.get("limit")!) : undefined,
     });
-    return NextResponse.json(result);
+    return NextResponse.json(result, {
+      headers: { "Cache-Control": "no-store" },
+    });
   } catch {
     return NextResponse.json({ destinations: [], total: 0, pages: 1 }, { status: 500 });
   }

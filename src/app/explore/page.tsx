@@ -1,6 +1,7 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 import { FaSearch, FaStar, FaMapMarkerAlt, FaFilter } from "react-icons/fa";
 import { Destination } from "@/types";
 import Link from "next/link";
@@ -18,25 +19,27 @@ function ExploreContent() {
   const [sort, setSort] = useState("");
   const [page, setPage] = useState(1);
 
-  const fetchDestinations = useCallback(async () => {
-    setLoading(true);
-    try {
-      const params = new URLSearchParams({ search, category, sort, page: String(page) });
-      const res = await fetch(`/api/destinations?${params}`);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      setDestinations(data.destinations || []);
-      setTotal(data.total || 0);
-      setPages(data.pages || 1);
-    } catch (err) {
-      console.error("Failed to fetch destinations:", err);
-      setDestinations([]);
-    } finally {
-      setLoading(false);
-    }
+  useEffect(() => {
+    let cancelled = false;
+    const params = new URLSearchParams({ search, category, sort, page: String(page) });
+    const load = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/destinations?${params}`, { cache: "no-store" });
+        const data = await res.json();
+        if (cancelled) return;
+        setDestinations(data.destinations || []);
+        setTotal(data.total || 0);
+        setPages(data.pages || 1);
+      } catch (err) {
+        if (!cancelled) { console.error(err); setDestinations([]); }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+    load();
+    return () => { cancelled = true; };
   }, [search, category, sort, page]);
-
-  useEffect(() => { fetchDestinations(); }, [fetchDestinations]);
 
   const categories = ["", "beach", "mountain", "city", "adventure", "cruise"];
 
@@ -102,7 +105,7 @@ function ExploreContent() {
               <div key={dest._id} className="bg-base-100 border border-base-300 rounded-2xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
                 {/* Image */}
                 <div className="relative overflow-hidden h-56">
-                  <img src={dest.image} alt={dest.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <Image src={dest.image} alt={dest.title} fill className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   <span className="absolute top-3 left-3 badge badge-primary text-white capitalize">{dest.category}</span>
                   {dest.duration && <span className="absolute top-3 right-3 bg-base-100/90 text-base-content text-xs font-bold px-3 py-1 rounded-full">{dest.duration}</span>}
                 </div>
