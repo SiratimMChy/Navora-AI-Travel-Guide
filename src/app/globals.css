@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@layer base {
+  @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+  .font-lobster {
+    font-family: 'Lobster', cursive;
+  }
+}
+
+@plugin "daisyui" {
+  themes: light --default, dark;
+}
+
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+
+  --color-primary: #38bdf8;
+  /* sky blue */
+  --color-secondary: #14b8a6;
+  /* teal */
+}
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
