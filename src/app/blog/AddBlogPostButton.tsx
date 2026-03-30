@@ -1,22 +1,44 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaImage } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 export default function AddBlogPostButton() {
   const { data: session } = useSession();
   const router = useRouter();
+  const fileRef = useRef<HTMLInputElement>(null);
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({ title: "", excerpt: "", content: "", image: "", category: "", readTime: "5 min read" });
+  const [preview, setPreview] = useState("");
+  const [uploading, setUploading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
   if (!session?.user) return null;
 
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setPreview(URL.createObjectURL(file));
+    setUploading(true);
+    const fd = new FormData();
+    fd.append("image", file);
+    const res = await fetch(`https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_API_KEY}`, { method: "POST", body: fd });
+    const data = await res.json();
+    setUploading(false);
+    if (data.success) {
+      setForm((prev) => ({ ...prev, image: data.data.url }));
+    } else {
+      Swal.fire("Upload failed", "Could not upload image.", "error");
+      setPreview("");
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!form.image) { Swal.fire("Image required", "Please upload a cover image.", "warning"); return; }
     setSubmitting(true);
     const res = await fetch("/api/blog", {
       method: "POST",
@@ -27,6 +49,7 @@ export default function AddBlogPostButton() {
     if (res.ok) {
       setOpen(false);
       setForm({ title: "", excerpt: "", content: "", image: "", category: "", readTime: "5 min read" });
+      setPreview("");
       Swal.fire("Published!", "Your blog post is live.", "success").then(() => router.refresh());
     } else {
       Swal.fire("Error", "Failed to publish post.", "error");
@@ -41,7 +64,7 @@ export default function AddBlogPostButton() {
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6">
         <div className="flex items-center justify-between mb-5">
           <h2 className="text-xl font-bold text-gray-800">New Blog Post</h2>
-          <button type="button" onClick={() => setOpen(false)} className="text-gray-400 hover:text-gray-600 text-xl font-bold">✕</button>
+          <button type="button" onClick={() => { setOpen(false); setPreview(""); }} className="text-gray-400 hover:text-gray-600 text-xl font-bold">✕</button>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -58,10 +81,29 @@ export default function AddBlogPostButton() {
               <input placeholder="e.g. 5 min read" value={form.readTime} onChange={(e) => setForm({ ...form, readTime: e.target.value })} className={inputCls} />
             </div>
           </div>
+
+          {/* Image upload */}
           <div>
-            <label className={labelCls}>Cover Image URL</label>
-            <input required placeholder="https://..." value={form.image} onChange={(e) => setForm({ ...form, image: e.target.value })} className={inputCls} />
+            <label className={labelCls}>Cover Image</label>
+            <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleImageChange} />
+            <div
+              onClick={() => fileRef.current?.click()}
+              className="w-full h-36 rounded-xl border-2 border-dashed border-gray-300 hover:border-sky-400 cursor-pointer flex items-center justify-center overflow-hidden transition"
+            >
+              {uploading ? (
+                <span className="text-sm text-gray-400 animate-pulse">Uploading...</span>
+              ) : preview ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={preview} alt="preview" className="w-full h-full object-cover rounded-xl" />
+              ) : (
+                <div className="text-center text-gray-400">
+                  <FaImage size={28} className="mx-auto mb-1" />
+                  <span className="text-sm">Click to upload image</span>
+                </div>
+              )}
+            </div>
           </div>
+
           <div>
             <label className={labelCls}>Excerpt</label>
             <textarea required placeholder="Short summary of your post..." value={form.excerpt} onChange={(e) => setForm({ ...form, excerpt: e.target.value })} className={`${inputCls} resize-none`} rows={2} />
@@ -85,10 +127,10 @@ export default function AddBlogPostButton() {
             <textarea placeholder="Write your full blog content here..." value={form.content} onChange={(e) => setForm({ ...form, content: e.target.value })} className={`${inputCls} resize-none`} rows={5} />
           </div>
           <div className="flex gap-3 pt-1">
-            <button type="submit" disabled={submitting} className="flex-1 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-semibold transition disabled:opacity-50">
+            <button type="submit" disabled={submitting || uploading} className="flex-1 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-semibold transition disabled:opacity-50">
               {submitting ? "Publishing..." : "Publish"}
             </button>
-            <button type="button" onClick={() => setOpen(false)} className="flex-1 py-2.5 rounded-xl border border-gray-300 text-gray-600 hover:bg-gray-50 font-semibold transition">
+            <button type="button" onClick={() => { setOpen(false); setPreview(""); }} className="flex-1 py-2.5 rounded-xl border border-gray-300 text-gray-600 hover:bg-gray-50 font-semibold transition">
               Cancel
             </button>
           </div>
@@ -100,11 +142,7 @@ export default function AddBlogPostButton() {
 
   return (
     <>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-sky-700 hover:bg-sky-50 font-semibold text-sm shadow transition"
-      >
+      <button type="button" onClick={() => setOpen(true)} className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-sky-700 hover:bg-sky-50 font-semibold text-sm shadow transition">
         <FaPlus size={12} /> Add Post
       </button>
       {modal}

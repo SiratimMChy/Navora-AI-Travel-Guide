@@ -2,6 +2,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -13,34 +14,40 @@ const Typewriter = dynamic(
 
 const slides = [
   {
-    img: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=1400",
-    tagline: ["Tokyo, Japan — Where Tradition Meets Tomorrow."],
-    position: "object-center",
+    title: "Cox's Bazar",
+    country: "Bangladesh",
+    img: "https://i.ibb.co.com/cXvQPvJr/coxs-bazar-1400x480.png",
+    tagline: "The longest natural sea beach in the world with golden sands and stunning sunsets.",
   },
   {
-    img: "https://images.unsplash.com/photo-1506461883276-594a12b11cf3?w=1400",
-    tagline: ["Bali, Indonesia — The Island of the Gods."],
-    position: "object-center",
+    title: "Bali",
+    country: "Indonesia",
+    img: "https://i.ibb.co.com/gbt0cNSW/bali-resized-1400x480.png",
+    tagline: "A tropical paradise of lush rice terraces, temples, and breathtaking beaches.",
   },
   {
-    img: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1400",
-    tagline: ["Bangkok, Thailand — A City That Never Sleeps."],
-    position: "object-center",
+    title: "Tokyo",
+    country: "Japan",
+    img: "https://i.ibb.co.com/vxRD9w7g/tokyo-cinematic-resized-1400x480.png",
+    tagline: "A dynamic city where tradition blends seamlessly with futuristic innovation.",
   },
   {
-    img: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1400",
-    tagline: ["Maldives — The Purest Blue on Earth."],
-    position: "object-center",
+    title: "Maldives",
+    country: "Maldives",
+    img: "https://i.ibb.co.com/2LJWQNv/maldives-1400x480.png",
+    tagline: "Crystal-clear waters, white sandy beaches, and luxurious island escapes.",
   },
   {
-    img: "https://images.unsplash.com/photo-1608958435020-e8a7109ba809?w=1400",
-    tagline: ["Cox's Bazar, Bangladesh — Stunning coastal views."],
-    position: "object-center",
+    title: "Bangkok",
+    country: "Thailand",
+    img: "https://i.ibb.co.com/gbQvKDFM/bangkok-resized-1400x480.png",
+    tagline: "A vibrant city filled with golden temples, street markets, and nightlife.",
   },
   {
-    img: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1400",
-    tagline: ["Taj Mahal, India — An Eternal Symbol of Love."],
-    position: "object-top",
+    title: "Taj Mahal",
+    country: "India",
+    img: "https://i.ibb.co.com/v6gFF3r6/tajmahal-resized-1400x480.png",
+    tagline: "An iconic symbol of love and one of the most beautiful monuments in the world.",
   },
 ];
 
@@ -60,16 +67,22 @@ export default function Hero() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={slide.img}
-                alt={`Navora hero slide ${index + 1}`}
-                className={`w-full h-full object-cover brightness-75 ${slide.position}`}
+                alt={`${slide.title} - Navora`}
+                className="w-full h-full object-cover brightness-75"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-b from-black/30 via-transparent to-black/70" />
 
-              {/* Text at bottom center */}
-              <div className="absolute inset-0 flex items-end justify-center pb-6 lg:pb-10 px-4">
-                <p className="text-sm sm:text-xl md:text-3xl lg:text-4xl font-bold text-white text-center drop-shadow-lg bg-black/25 backdrop-blur-sm px-4 py-2 lg:px-8 lg:py-4 rounded-2xl border border-white/20">
+              {/* Center content */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 gap-2">
+                <p className="text-white/80 text-xs sm:text-sm uppercase tracking-widest font-medium">
+                  {slide.country}
+                </p>
+                <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold drop-shadow-xl">
+                  {slide.title}
+                </h1>
+                <p className="text-white/90 text-sm sm:text-base md:text-lg max-w-xl drop-shadow bg-black/25 backdrop-blur-sm px-4 py-2 rounded-2xl border border-white/20">
                   <Typewriter
-                    words={slide.tagline}
+                    words={[slide.tagline]}
                     loop
                     typeSpeed={70}
                     deleteSpeed={50}
@@ -78,6 +91,20 @@ export default function Hero() {
                     cursorStyle="|"
                   />
                 </p>
+                <div className="flex gap-3 mt-3">
+                  <Link
+                    href="/explore"
+                    className="btn btn-primary px-6 py-2 rounded-full text-sm font-semibold shadow-lg hover:scale-105 transition-transform"
+                  >
+                    Explore Destinations
+                  </Link>
+                  <button
+                    onClick={() => document.getElementById("featured")?.scrollIntoView({ behavior: "smooth" })}
+                    className="btn btn-outline px-6 py-2 rounded-full text-sm font-semibold text-white border-white hover:bg-white hover:text-black transition-all"
+                  >
+                    View Tours
+                  </button>
+                </div>
               </div>
             </div>
           </SwiperSlide>

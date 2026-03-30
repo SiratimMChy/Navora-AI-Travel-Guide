@@ -6,7 +6,7 @@ export default function FeaturedTours({ destinations }: { destinations: Destinat
   if (!destinations.length) return null;
 
   return (
-    <section className="py-16 px-4 bg-base-100">
+    <section id="featured" className="py-16 px-4 bg-base-100">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-base-content mb-3">Featured Tours</h2>

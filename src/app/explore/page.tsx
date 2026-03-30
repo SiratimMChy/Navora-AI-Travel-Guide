@@ -63,15 +63,15 @@ function ExploreContent() {
               className="w-full pl-11 pr-4 py-3 border border-base-300 rounded-xl outline-none focus:ring-2 focus:ring-sky-500 bg-base-100 text-base-content"
             />
           </div>
-          <div className="flex items-center gap-2">
-            <FaFilter className="text-base-content/40" />
+          <div className="flex items-center gap-2 w-full md:w-auto">
+            <FaFilter className="text-base-content/40 shrink-0" />
             <select value={category} onChange={(e) => { setCategory(e.target.value); setPage(1); }}
-              className="px-4 py-3 border border-base-300 rounded-xl outline-none focus:ring-2 focus:ring-sky-500 bg-base-100 text-base-content capitalize">
+              className="flex-1 px-4 py-3 border border-base-300 rounded-xl outline-none focus:ring-2 focus:ring-sky-500 bg-base-100 text-base-content capitalize">
               {categories.map((c) => <option key={c} value={c}>{c || "All Categories"}</option>)}
             </select>
           </div>
           <select value={sort} onChange={(e) => { setSort(e.target.value); setPage(1); }}
-            className="px-4 py-3 border border-base-300 rounded-xl outline-none focus:ring-2 focus:ring-sky-500 bg-base-100 text-base-content">
+            className="w-full md:w-auto px-4 py-3 border border-base-300 rounded-xl outline-none focus:ring-2 focus:ring-sky-500 bg-base-100 text-base-content">
             <option value="">Sort: Default</option>
             <option value="price_asc">Price: Low to High</option>
             <option value="price_desc">Price: High to Low</option>

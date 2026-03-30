@@ -81,7 +81,7 @@ function AsideInner() {
       {/* Mobile hamburger — only visible on small screens */}
       <button
         onClick={() => setMobileOpen(true)}
-        className="md:hidden fixed top-4 left-4 z-40 p-2 bg-base-100 border-2 border-base-300 rounded-xl shadow-md"
+        className="md:hidden fixed top-20 left-4 z-40 p-2 bg-base-100 border-2 border-base-300 rounded-xl shadow-md"
         aria-label="Open sidebar"
       >
         <Menu size={20} className="text-base-content" />
