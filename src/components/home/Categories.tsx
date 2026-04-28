@@ -3,10 +3,10 @@ import { FaUmbrellaBeach, FaMountain, FaCity, FaHiking, FaShip } from "react-ico
 
 const categories = [
   { name: "Beach", icon: FaUmbrellaBeach, color: "bg-sky-500/10 text-sky-500", slug: "beach" },
-  { name: "Mountain", icon: FaMountain, color: "bg-green-500/10 text-green-500", slug: "mountain" },
-  { name: "City", icon: FaCity, color: "bg-purple-500/10 text-purple-500", slug: "city" },
-  { name: "Adventure", icon: FaHiking, color: "bg-orange-500/10 text-orange-500", slug: "adventure" },
-  { name: "Cruise", icon: FaShip, color: "bg-teal-500/10 text-teal-500", slug: "cruise" },
+  { name: "Mountain", icon: FaMountain, color: "bg-teal-500/10 text-teal-500", slug: "mountain" },
+  { name: "City", icon: FaCity, color: "bg-sky-500/10 text-sky-500", slug: "city" },
+  { name: "Adventure", icon: FaHiking, color: "bg-teal-500/10 text-teal-500", slug: "adventure" },
+  { name: "Cruise", icon: FaShip, color: "bg-sky-500/10 text-sky-500", slug: "cruise" },
 ];
 
 export default function Categories() {

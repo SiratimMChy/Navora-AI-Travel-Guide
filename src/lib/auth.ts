@@ -48,6 +48,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.name = dbUser?.name || user.name;
         token.picture = dbUser?.image || user.image;
       }
+       
+      if (!user) {
+        await connectDB();
+        const dbUser = await UserModel.findOne({ email: token.email }, { role: 1, _id: 1 }).lean();
+        if (dbUser) {
+          token.role = (dbUser as { role?: string }).role || "user";
+          token.id = (dbUser as { _id: { toString(): string } })._id.toString();
+        }
+      }
       // Called when update() is invoked from the client
       if (trigger === "update" && session) {
         if (session.name) token.name = session.name;

@@ -16,6 +16,7 @@ export const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [errors, setErrors] = useState({ name: "", email: "", password: "" });
+  const [alreadyRegistered, setAlreadyRegistered] = useState(false);
 
   const pwRules = [
     { label: "At least 6 characters", pass: form.password.length >= 6 },
@@ -49,7 +50,12 @@ export const RegisterForm = () => {
       if (signInResult?.ok) router.push(callbackUrl);
       else setErrors({ ...errors, email: "Account created but login failed. Try logging in." });
     } else {
-      setErrors({ ...errors, email: result.error || "This email is already registered." });
+      const msg: string = result.error || "";
+      if (msg.toLowerCase().includes("already") || msg.toLowerCase().includes("exists")) {
+        setAlreadyRegistered(true);
+      } else {
+        setErrors({ ...errors, email: msg || "Registration failed. Please try again." });
+      }
     }
     setLoading(false);
   };
@@ -105,6 +111,14 @@ export const RegisterForm = () => {
             )}
             {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
           </div>
+          {alreadyRegistered && (
+            <div className="bg-sky-500/10 border border-sky-500/30 rounded-xl px-4 py-3 text-sm text-center">
+              <p className="text-base-content font-medium mb-1">This email is already registered.</p>
+              <Link href={`/login?callbackUrl=${encodeURIComponent(callbackUrl)}`} className="text-sky-500 font-semibold hover:underline">
+                Login to your account →
+              </Link>
+            </div>
+          )}
           <button disabled={loading} type="submit"
             className="w-full btn btn-primary text-white font-semibold py-3 rounded-xl disabled:opacity-50">
             {loading ? <AiOutlineLoading className="animate-spin mx-auto" size={20} /> : "Create Account"}

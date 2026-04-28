@@ -45,6 +45,8 @@ export default function Navbar() {
     });
   }, []);
 
+  if (pathname?.startsWith("/dashboard")) return null;
+
   const handleThemeChange = () => {
     const next = !isChecked;
     const theme = next ? "dark" : "light";
@@ -127,7 +129,7 @@ export default function Navbar() {
               <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar hover:scale-110 transition-transform duration-200">
                 {user?.image ? (
                   <div className="w-10 rounded-full ring-2 ring-sky-500 ring-offset-base-100 ring-offset-2 hover:ring-4 transition-all duration-300">
-                    <Image src={user.image} alt="avatar" width={40} height={40} className="rounded-full object-cover w-full h-full" />
+                    <Image src={user.image} alt="User Avatar" width={40} height={40} className="rounded-full object-cover w-full h-full" />
                   </div>
                 ) : (
                   <div className="w-10 h-10 rounded-full bg-sky-500 ring-2 ring-sky-500 ring-offset-base-100 ring-offset-2 flex items-center justify-center text-white">
@@ -135,8 +137,7 @@ export default function Navbar() {
                   </div>
                 )}
               </div>
-              <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-64 p-4 shadow-xl border border-base-300 right-0">
-                {/* User info header */}
+              <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-72 p-4 shadow-xl border border-base-300 right-0">
                 <li className="menu-title px-0 py-2 mb-2">
                   <div className="flex flex-col gap-1 w-full">
                     <span className="text-base font-bold text-sky-600 truncate">{user?.name || "User"}</span>

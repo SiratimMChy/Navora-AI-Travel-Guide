@@ -82,16 +82,15 @@ function DashboardContent() {
           .then((d) => setMyReviews(Array.isArray(d) ? d : []));
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [status]);
 
-  // Refetch bookings when returning from successful payment
+  }, [session?.user, status]);
+
   useEffect(() => {
     const payment = searchParams.get("payment");
     if (payment === "success" && status === "authenticated") {
       fetchBookings();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   }, [searchParams, status]);
 
   useEffect(() => {
@@ -117,10 +116,10 @@ function DashboardContent() {
   ];
 
   return (
-    <div className="min-h-screen bg-base-100 p-4 md:p-6">
+    <div className="min-h-screen bg-base-100 p-4 pt-8 md:p-6">
       {/* Page header */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-base-content">
+        <h1 className="text-xl sm:text-2xl font-bold text-base-content">
           Welcome back, {user?.name?.split(" ")[0]} 👋
         </h1>
         <p className="text-base-content/50 text-sm mt-0.5">Manage your profile, bookings and reviews</p>
@@ -130,9 +129,9 @@ function DashboardContent() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
         {[
           { label: "Total Trips", value: bookings.length, color: "text-sky-500" },
-          { label: "Confirmed", value: bookings.filter((b) => b.status === "confirmed").length, color: "text-green-500" },
-          { label: "Pending", value: bookings.filter((b) => b.status === "pending").length, color: "text-yellow-500" },
-          { label: "Rejected", value: bookings.filter((b) => b.status === "rejected").length, color: "text-red-500" },
+          { label: "Confirmed", value: bookings.filter((b) => b.status === "confirmed").length, color: "text-teal-500" },
+          { label: "Pending", value: bookings.filter((b) => b.status === "pending").length, color: "text-sky-400" },
+          { label: "Rejected", value: bookings.filter((b) => b.status === "rejected").length, color: "text-base-content/50" },
         ].map(({ label, value, color }) => (
           <div key={label} className="bg-base-200 rounded-2xl p-4 text-center border border-base-300">
             <p className={`text-2xl font-bold ${color}`}>{value}</p>
