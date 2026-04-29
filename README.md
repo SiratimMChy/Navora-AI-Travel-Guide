@@ -12,10 +12,10 @@
 
 ## 🚀 Tech Stack
 
-*   **Frontend:** Next.js (App Router), React.js, Tailwind CSS, DaisyUI
+*   **Frontend:** Next.js, Tailwind CSS, DaisyUI
 *   **Backend:** Next.js Server Actions & API Routes
 *   **Database:** MongoDB, Mongoose
-*   **Authentication:** NextAuth.js (v5)
+*   **Authentication:** NextAuth.js
 *   **Payments:** Stripe
 *   **AI Integration:** Groq AI
 *   **Deployment:** Vercel
