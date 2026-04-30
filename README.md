@@ -1,7 +1,5 @@
 # Navora - AI-Powered Travel Booking Platform
 
-![Navora Banner](https://via.placeholder.com/1200x400?text=Navora+AI-Powered+Travel+Booking+Platform)
-
 **Navora** is a comprehensive, AI-driven travel platform designed to solve fragmented trip planning. It integrates booking, payments, and AI-powered recommendations to provide a seamless travel planning experience.
 
 ## ✨ Key Highlights
