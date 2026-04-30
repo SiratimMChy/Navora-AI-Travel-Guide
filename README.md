@@ -30,46 +30,6 @@
 *   Stripe Account (for payment testing)
 *   Groq API Key
 
-### Installation
-
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/yourusername/navora.git
-    cd navora
-    ```
-
-2.  **Install dependencies:**
-    ```bash
-    npm install
-    ```
-
-3.  **Set up environment variables:**
-    Create a `.env` file in the root directory and add the following:
-    ```env
-    # App
-    NEXT_PUBLIC_APP_URL=http://localhost:3000
-
-    # Database
-    MONGODB_URI=your_mongodb_connection_string
-
-    # Authentication (NextAuth)
-    AUTH_SECRET=your_nextauth_secret
-    
-    # Payments (Stripe)
-    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
-    STRIPE_SECRET_KEY=your_stripe_secret_key
-
-    # AI (Groq)
-    GROQ_API_KEY=your_groq_api_key
-    ```
-
-4.  **Run the development server:**
-    ```bash
-    npm run dev
-    ```
-
-5.  Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
 ## 📂 Project Structure
 
 ```text
