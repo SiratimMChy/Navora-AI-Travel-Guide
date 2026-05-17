@@ -36,7 +36,7 @@ export default function Blog({ posts }: { posts: BlogPost[] }) {
           ))}
         </div>
         <div className="text-center mt-10">
-          <Link href="/blog" className="btn btn-outline btn-primary px-8 py-3 text-lg rounded-xl">
+          <Link href="/blog" className="btn btn-outline hover:bg-gradient-to-r hover:from-blue-600 hover:to-cyan-500 hover:text-white hover:border-transparent px-8 py-3 text-lg rounded-xl transition-all">
             Read All Articles
           </Link>
         </div>

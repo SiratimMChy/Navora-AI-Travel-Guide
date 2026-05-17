@@ -120,7 +120,7 @@ export const RegisterForm = () => {
             </div>
           )}
           <button disabled={loading} type="submit"
-            className="w-full btn btn-primary text-white font-semibold py-3 rounded-xl disabled:opacity-50">
+            className="w-full btn text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-sky-600 hover:to-teal-600 border-none font-semibold py-3 rounded-xl disabled:opacity-50">
             {loading ? <AiOutlineLoading className="animate-spin mx-auto" size={20} /> : "Create Account"}
           </button>
           <div className="relative flex items-center">

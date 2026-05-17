@@ -88,7 +88,7 @@ export default function PrivacyPage() {
         ))}
 
         <div className="text-center pt-4">
-          <Link href="/" className="btn btn-primary btn-sm text-white">Back to Home</Link>
+          <Link href="/" className="btn btn-sm text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-sky-600 hover:to-teal-600 border-none">Back to Home</Link>
         </div>
       </div>
     </div>

@@ -120,7 +120,7 @@ export default function AddBlogPostButton() {
                   const data = await res.json();
                   if (data.success) setForm((prev) => ({ ...prev, content: data.data }));
                 }}
-                className="text-xs px-3 py-1 rounded-lg bg-gradient-to-r from-sky-500 to-teal-500 text-white font-semibold hover:opacity-90 disabled:opacity-40 transition">
+                className="text-xs px-3 py-1 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold hover:opacity-90 disabled:opacity-40 transition">
                 ✨ Generate with AI
               </button>
             </div>

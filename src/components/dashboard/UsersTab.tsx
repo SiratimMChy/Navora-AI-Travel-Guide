@@ -221,7 +221,7 @@ export default function UsersTab({ users, setUsers, loading }: Props) {
                 <button
                   key={p}
                   onClick={() => setUserPage(p)}
-                  className={`btn btn-sm ${p === userPage ? "btn-primary text-white" : "btn-ghost"}`}
+                  className={`btn btn-sm ${p === userPage ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white border-none" : "btn-ghost"}`}
                 >
                   {p}
                 </button>
@@ -268,7 +268,7 @@ export default function UsersTab({ users, setUsers, loading }: Props) {
                     <option value="admin">admin</option>
                   </select>
                 </div>
-                <button type="submit" className="btn btn-primary text-white w-full mt-2">
+                <button type="submit" className="btn text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-sky-600 hover:to-teal-600 border-none w-full mt-2">
                   Update Role
                 </button>
               </div>

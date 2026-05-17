@@ -6,6 +6,7 @@ import { FaSearch, FaStar, FaMapMarkerAlt, FaFilter } from "react-icons/fa";
 import { Destination } from "@/types";
 import Link from "next/link";
 import { Suspense } from "react";
+import { getCategoryGradient } from "@/lib/categoryColors";
 
 function ExploreContent() {
   const searchParams = useSearchParams();
@@ -106,7 +107,9 @@ function ExploreContent() {
                 {/* Image */}
                 <div className="relative overflow-hidden h-56">
                   <Image src={dest.image} alt={dest.title} fill className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <span className="absolute top-3 left-3 badge badge-primary text-white capitalize">{dest.category}</span>
+                  <span className={`absolute top-3 left-3 ${getCategoryGradient(dest.category)} text-white text-xs font-bold px-3 py-1.5 rounded-full capitalize shadow-lg`}>
+                    {dest.category}
+                  </span>
                   {dest.duration && <span className="absolute top-3 right-3 bg-base-100/90 text-base-content text-xs font-bold px-3 py-1 rounded-full">{dest.duration}</span>}
                 </div>
                 {/* Body */}
@@ -137,7 +140,7 @@ function ExploreContent() {
                       </p>
                     </div>
                     <Link href={`/destinations/${dest._id}`}
-                      className="bg-linear-to-r from-blue-600 to-cyan-500 text-white text-sm font-semibold px-5 py-2 rounded-xl hover:opacity-90 transition-opacity">
+                      className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-sm font-semibold px-5 py-2 rounded-xl hover:from-blue-700 hover:to-cyan-600 transition-all shadow-md">
                       See Details
                     </Link>
                   </div>
@@ -152,7 +155,7 @@ function ExploreContent() {
           <div className="flex justify-center gap-2 mt-10">
             {Array.from({ length: pages }, (_, i) => i + 1).map((p) => (
               <button key={p} onClick={() => setPage(p)}
-                className={`btn btn-sm ${page === p ? "btn-primary text-white" : "btn-outline"}`}>
+                className={`btn btn-sm ${page === p ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white border-none hover:from-sky-600 hover:to-teal-600" : "btn-outline hover:bg-gradient-to-r hover:from-sky-500 hover:to-teal-500 hover:text-white hover:border-transparent"}`}>
                 {p}
               </button>
             ))}

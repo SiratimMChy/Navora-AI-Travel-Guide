@@ -61,7 +61,7 @@ export default function DestinationDetailPage() {
     <div className="min-h-screen flex flex-col items-center justify-center gap-4 bg-base-100">
       <p className="text-6xl">🗺️</p>
       <h2 className="text-2xl font-bold text-base-content">Destination not found</h2>
-      <Link href="/explore" className="btn btn-primary text-white">Back to Explore</Link>
+      <Link href="/explore" className="btn text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 border-none">Back to Explore</Link>
     </div>
   );
 
@@ -202,7 +202,7 @@ export default function DestinationDetailPage() {
               </div>
 
               <button onClick={handleBook} disabled={booking}
-                  className="w-full btn btn-primary text-white py-3 text-lg rounded-xl disabled:opacity-50 border-0">
+                  className="w-full btn text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 border-none py-3 text-lg rounded-xl disabled:opacity-50">
                   {booking ? "Booking..." : "🛒 Book Now"}
                 </button>
 

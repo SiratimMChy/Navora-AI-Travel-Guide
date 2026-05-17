@@ -47,6 +47,8 @@ export default function Footer() {
         <nav>
           <h6 className="footer-title opacity-60">Legal</h6>
           <Link href="/privacy" className="link link-hover text-white/60 hover:text-white">Privacy Policy</Link>
+          <Link href="/terms" className="link link-hover text-white/60 hover:text-white">Terms of Service</Link>
+          <Link href="/refund" className="link link-hover text-white/60 hover:text-white">Refund Policy</Link>
         </nav>
 
       </footer>

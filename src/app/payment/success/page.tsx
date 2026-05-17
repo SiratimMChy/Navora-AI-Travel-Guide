@@ -50,7 +50,7 @@ function PaymentSuccessContent() {
         <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
 
           {/* Header */}
-          <div className="bg-linear-to-r from-sky-500 to-teal-500 p-8 text-center relative overflow-hidden">
+          <div className="bg-linear-to-r from-blue-600 to-cyan-500 p-8 text-center relative overflow-hidden">
             <div className="absolute inset-0 bg-white/10" />
             <div className="relative z-10">
               <div className="flex justify-center mb-4">
@@ -91,7 +91,7 @@ function PaymentSuccessContent() {
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <button
                 onClick={() => router.push("/dashboard?tab=bookings&payment=success")}
-                className="flex-1 py-3 rounded-xl font-semibold text-center text-white bg-linear-to-r from-sky-500 to-teal-500 hover:opacity-90 transition-opacity"
+                className="flex-1 py-3 rounded-xl font-semibold text-center text-white bg-linear-to-r from-blue-600 to-cyan-500 hover:opacity-90 transition-opacity"
               >
                 View My Bookings
               </button>

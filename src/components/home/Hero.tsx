@@ -94,7 +94,7 @@ export default function Hero() {
                 <div className="flex gap-3 mt-3">
                   <Link
                     href="/explore"
-                    className="btn btn-primary px-6 py-2 rounded-full text-sm font-semibold shadow-lg hover:scale-105 transition-transform"
+                    className="btn px-6 py-2 rounded-full text-sm font-semibold shadow-lg hover:scale-105 transition-transform bg-gradient-to-r from-blue-600 to-cyan-500 text-white border-none hover:from-blue-700 hover:to-cyan-600"
                   >
                     Explore Destinations
                   </Link>

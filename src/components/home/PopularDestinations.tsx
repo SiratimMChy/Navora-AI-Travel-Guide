@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FaStar, FaMapMarkerAlt } from "react-icons/fa";
 import { Destination } from "@/types";
+import { getCategoryGradient } from "@/lib/categoryColors";
 
 export default function PopularDestinations({ destinations }: { destinations: Destination[] }) {
   if (!destinations.length) return null;
@@ -18,7 +19,9 @@ export default function PopularDestinations({ destinations }: { destinations: De
               <div className="relative overflow-hidden h-56">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={dest.image} alt={dest.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <span className="absolute top-3 left-3 badge badge-primary text-white capitalize">{dest.category}</span>
+                <span className={`absolute top-3 left-3 ${getCategoryGradient(dest.category)} text-white text-xs font-bold px-3 py-1.5 rounded-full capitalize shadow-lg`}>
+                  {dest.category}
+                </span>
                 {dest.duration && (
                   <span className="absolute top-3 right-3 bg-base-100/90 text-base-content text-xs font-bold px-3 py-1 rounded-full">{dest.duration}</span>
                 )}
@@ -48,7 +51,7 @@ export default function PopularDestinations({ destinations }: { destinations: De
                     </p>
                   </div>
                   <Link href={`/destinations/${dest._id}`}
-                    className="bg-linear-to-r from-blue-600 to-cyan-500 text-white text-sm font-semibold px-5 py-2 rounded-xl hover:opacity-90 transition-opacity">
+                    className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-sm font-semibold px-5 py-2 rounded-xl hover:from-blue-700 hover:to-cyan-600 transition-all shadow-md">
                     See Details
                   </Link>
                 </div>
@@ -57,7 +60,7 @@ export default function PopularDestinations({ destinations }: { destinations: De
           ))}
         </div>
         <div className="text-center mt-10">
-          <Link href="/explore" className="btn text-white px-8 py-3 text-lg rounded-xl border-0 bg-linear-to-r from-blue-600 to-cyan-500 hover:opacity-90 transition-opacity">
+          <Link href="/explore" className="btn text-white px-8 py-3 text-lg rounded-xl border-0 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 transition-all shadow-lg">
             View All Destinations
           </Link>
         </div>

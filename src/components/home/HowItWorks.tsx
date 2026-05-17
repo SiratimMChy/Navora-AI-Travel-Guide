@@ -20,7 +20,7 @@ export default function HowItWorks() {
           <div className="hidden lg:block absolute top-12 left-[12.5%] right-[12.5%] h-px bg-linear-to-r from-sky-300 via-teal-300 to-sky-300 z-0" />
           {steps.map(({ icon: Icon, step, title, desc }) => (
             <div key={step} className="relative z-10 flex flex-col items-center text-center group">
-              <div className="w-20 h-20 rounded-full bg-linear-to-br from-sky-500 to-teal-500 flex items-center justify-center shadow-lg mb-5 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-20 h-20 rounded-full bg-linear-to-br from-blue-600 to-cyan-500 flex items-center justify-center shadow-lg mb-5 group-hover:scale-110 transition-transform duration-300">
                 <Icon className="text-white" size={26} />
               </div>
               <span className="absolute top-0 right-[calc(50%-2.5rem)] bg-base-100 text-sky-500 text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center border border-sky-200 shadow-sm">

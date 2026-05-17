@@ -38,7 +38,7 @@ export default function BlogTab({ blogPosts, setBlogPosts, loading }: Props) {
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <h2 className="text-xl font-bold text-base-content">Blog Posts</h2>
-        <button onClick={() => setShowAddPost(!showAddPost)} className="btn btn-primary btn-sm text-white gap-2"><FaPlus /> Add Post</button>
+        <button onClick={() => setShowAddPost(!showAddPost)} className="btn btn-sm text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-sky-600 hover:to-teal-600 border-none gap-2"><FaPlus /> Add Post</button>
       </div>
 
       {showAddPost && (
@@ -51,7 +51,7 @@ export default function BlogTab({ blogPosts, setBlogPosts, loading }: Props) {
           <textarea placeholder="Excerpt" value={newPost.excerpt} onChange={(e) => setNewPost({ ...newPost, excerpt: e.target.value })} className="textarea textarea-bordered w-full col-span-full" rows={2} required />
           <textarea placeholder="Full content" value={newPost.content} onChange={(e) => setNewPost({ ...newPost, content: e.target.value })} className="textarea textarea-bordered w-full col-span-full" rows={4} />
           <div className="col-span-full flex gap-3">
-            <button type="submit" className="btn btn-primary text-white">Save Post</button>
+            <button type="submit" className="btn text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-sky-600 hover:to-teal-600 border-none">Save Post</button>
             <button type="button" onClick={() => setShowAddPost(false)} className="btn btn-ghost">Cancel</button>
           </div>
         </form>

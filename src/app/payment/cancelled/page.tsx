@@ -75,7 +75,7 @@ function PaymentCancelledContent() {
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <Link
                 href="/dashboard?tab=bookings"
-                className="flex-1 py-3 rounded-xl font-semibold text-center text-white bg-linear-to-r from-sky-500 to-teal-500 hover:opacity-90 transition-opacity"
+                className="flex-1 py-3 rounded-xl font-semibold text-center text-white bg-linear-to-r from-blue-600 to-cyan-500 hover:opacity-90 transition-opacity"
               >
                 Go to My Bookings
               </Link>

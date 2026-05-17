@@ -42,7 +42,7 @@ export default function DestinationsTab({ destinations, setDestinations, loading
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <h2 className="text-xl font-bold text-base-content">Manage Destinations</h2>
-        <button onClick={() => setShowAddForm(!showAddForm)} className="btn btn-primary btn-sm text-white gap-2">
+        <button onClick={() => setShowAddForm(!showAddForm)} className="btn btn-sm text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-sky-600 hover:to-teal-600 border-none gap-2">
           <FaPlus /> Add Destination
         </button>
       </div>
@@ -67,14 +67,14 @@ export default function DestinationsTab({ destinations, setDestinations, loading
                   const data = await res.json();
                   if (data.success) setNewDest({ ...newDest, description: data.data });
                 }}
-                className="btn btn-xs bg-linear-to-r from-sky-500 to-teal-500 text-white border-0 hover:opacity-90 disabled:opacity-40">
+                className="btn btn-xs bg-linear-to-r from-blue-600 to-cyan-500 text-white border-0 hover:opacity-90 disabled:opacity-40">
                 ✨ Generate with AI
               </button>
             </div>
             <textarea placeholder="Description" value={newDest.description} onChange={(e) => setNewDest({ ...newDest, description: e.target.value })} className="textarea textarea-bordered w-full" rows={3} required />
           </div>
           <div className="col-span-full flex gap-3">
-            <button type="submit" className="btn btn-primary text-white">Save Destination</button>
+            <button type="submit" className="btn text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-sky-600 hover:to-teal-600 border-none">Save Destination</button>
             <button type="button" onClick={() => setShowAddForm(false)} className="btn btn-ghost">Cancel</button>
           </div>
         </form>
@@ -125,7 +125,7 @@ export default function DestinationsTab({ destinations, setDestinations, loading
               <div className="flex gap-1">
                 <button onClick={() => setDestPage((p) => Math.max(1, p - 1))} disabled={destPage === 1} className="btn btn-xs btn-outline disabled:opacity-40">‹</button>
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-                  <button key={p} onClick={() => setDestPage(p)} className={`btn btn-xs ${destPage === p ? "btn-primary text-white" : "btn-outline"}`}>{p}</button>
+                  <button key={p} onClick={() => setDestPage(p)} className={`btn btn-xs ${destPage === p ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white border-none" : "btn-outline"}`}>{p}</button>
                 ))}
                 <button onClick={() => setDestPage((p) => Math.min(totalPages, p + 1))} disabled={destPage === totalPages} className="btn btn-xs btn-outline disabled:opacity-40">›</button>
               </div>

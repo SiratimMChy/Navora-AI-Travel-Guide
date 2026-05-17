@@ -62,7 +62,7 @@ export default function ContactPage() {
               className="w-full px-4 py-3 border border-base-300 rounded-xl outline-none focus:ring-2 focus:ring-sky-500 resize-none bg-base-100 text-base-content"
               rows={5} placeholder="Tell us more..." required />
           </div>
-          <button type="submit" className="w-full btn btn-primary text-white py-3 text-lg rounded-xl">Send Message</button>
+          <button type="submit" className="w-full btn text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-sky-600 hover:to-teal-600 border-none py-3 text-lg rounded-xl">Send Message</button>
         </form>
       </div>
     </div>

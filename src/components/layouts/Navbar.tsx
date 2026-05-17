@@ -61,7 +61,7 @@ export default function Navbar() {
   const linkClass = (href: string) =>
     "font-bold text-base leading-none transition-colors duration-200 " +
     (pathname === href
-      ? "bg-linear-to-r from-sky-500 to-teal-500 bg-clip-text text-transparent"
+      ? "bg-linear-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent"
       : "text-base-content hover:text-sky-500");
 
   const nav = (
@@ -172,7 +172,7 @@ export default function Navbar() {
             </div>
           ) : (
             <>
-              <Link href="/login" className="btn btn-primary btn-sm text-white">Login</Link>
+              <Link href="/login" className="btn btn-sm text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-sky-600 hover:to-teal-600 border-none shadow-md">Login</Link>
             </>
           )}
         </div>

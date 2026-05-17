@@ -38,7 +38,7 @@ export default function SettingsTab() {
           <button onClick={() => Swal.fire("Warning", "This would reset all analytics data.", "warning")} className="btn btn-outline btn-error btn-sm">Reset Analytics</button>
         </div>
       </div>
-      <button onClick={() => Swal.fire("Saved!", "Settings updated successfully.", "success")} className="btn btn-primary text-white gap-2">
+      <button onClick={() => Swal.fire("Saved!", "Settings updated successfully.", "success")} className="btn text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-sky-600 hover:to-teal-600 border-none gap-2">
         <FaSave /> Save Settings
       </button>
     </div>

@@ -91,7 +91,7 @@ export default function AIAssistant() {
       {/* FAB */}
       <button
         onClick={handleOpen}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-linear-to-br from-sky-500 to-teal-500 text-white shadow-2xl hover:scale-110 active:scale-95 transition-transform flex items-center justify-center"
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-linear-to-br from-blue-600 to-cyan-500 text-white shadow-2xl hover:scale-110 active:scale-95 transition-transform flex items-center justify-center"
         aria-label="Open AI Assistant"
       >
         <FaComments size={22} />
@@ -191,7 +191,7 @@ export default function AIAssistant() {
                 <div className="grid grid-cols-3 gap-1.5">
                   {CATEGORIES.map((cat) => (
                     <button key={cat} onClick={() => handleCategory(cat)}
-                      className="btn btn-xs btn-outline capitalize hover:btn-primary hover:text-white transition-all">
+                      className="btn btn-xs btn-outline capitalize hover:bg-gradient-to-r hover:from-blue-600 hover:to-cyan-500 hover:text-white hover:border-transparent transition-all">
                       {cat}
                     </button>
                   ))}
@@ -205,7 +205,7 @@ export default function AIAssistant() {
                 <div className="grid grid-cols-2 gap-1.5">
                   {BUDGETS.map((b) => (
                     <button key={b} onClick={() => handleBudget(b)}
-                      className={`btn btn-xs ${prefs.budget === b ? "btn-primary text-white" : "btn-outline"}`}>
+                      className={`btn btn-xs ${prefs.budget === b ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white border-none" : "btn-outline"}`}>
                       ${b}
                     </button>
                   ))}

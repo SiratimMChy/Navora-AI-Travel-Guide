@@ -166,7 +166,7 @@ export default function ProfileTab() {
         <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-base-300">
           {!isEditing ? (
             <button type="button" onClick={() => setIsEditing(true)}
-              className="btn btn-primary text-white gap-2 flex-1 sm:flex-none px-8">
+              className="btn text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-sky-600 hover:to-teal-600 border-none gap-2 flex-1 sm:flex-none px-8">
               <FaEdit /> Edit Profile
             </button>
           ) : (

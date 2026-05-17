@@ -173,7 +173,7 @@ function DashboardContent() {
               <FaPlane className="text-6xl mx-auto mb-4 opacity-20" />
               <p className="text-lg font-semibold mb-1">No bookings yet</p>
               <p className="text-sm mb-5">Start exploring and book your first trip!</p>
-              <a href="/explore" className="btn btn-primary btn-sm text-white">Explore Now</a>
+              <a href="/explore" className="btn btn-sm text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-sky-600 hover:to-teal-600 border-none">Explore Now</a>
             </div>
           ) : (
             <div className="space-y-4">
@@ -211,7 +211,7 @@ function DashboardContent() {
                             <button
                               onClick={() => handlePay(b)}
                               disabled={payingId === String(b._id)}
-                              className="btn btn-sm text-white bg-linear-to-r from-sky-500 to-teal-500 hover:opacity-90 border-0 disabled:opacity-50"
+                              className="btn btn-sm text-white bg-linear-to-r from-blue-600 to-cyan-500 hover:opacity-90 border-0 disabled:opacity-50"
                             >
                               {payingId === String(b._id) ? <span className="loading loading-spinner loading-xs" /> : "💳 Pay Now"}
                             </button>
@@ -237,7 +237,7 @@ function DashboardContent() {
         <div className="bg-base-200 rounded-2xl border border-base-300 p-6 space-y-4">
           <div className="flex justify-between items-center">
             <h2 className="text-xl font-bold text-base-content">My Blog Posts</h2>
-            <button onClick={() => setShowAddPost(!showAddPost)} className="btn btn-primary btn-sm text-white gap-2">
+            <button onClick={() => setShowAddPost(!showAddPost)} className="btn btn-sm text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-sky-600 hover:to-teal-600 border-none gap-2">
               <FaPlus /> Add Post
             </button>
           </div>
@@ -281,7 +281,7 @@ function DashboardContent() {
                       const data = await res.json();
                       if (data.success) setNewPost((prev) => ({ ...prev, content: data.data }));
                     }}
-                    className="btn btn-xs bg-linear-to-r from-sky-500 to-teal-500 text-white border-0 hover:opacity-90 disabled:opacity-40"
+                    className="btn btn-xs bg-linear-to-r from-blue-600 to-cyan-500 text-white border-0 hover:opacity-90 disabled:opacity-40"
                   >
                     ✨ Generate with AI
                   </button>
@@ -289,7 +289,7 @@ function DashboardContent() {
                 <textarea placeholder="Full content" value={newPost.content} onChange={(e) => setNewPost({ ...newPost, content: e.target.value })} className="textarea textarea-bordered w-full" rows={5} />
               </div>
               <div className="col-span-full flex gap-3">
-                <button type="submit" className="btn btn-primary text-white">Publish Post</button>
+                <button type="submit" className="btn text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-sky-600 hover:to-teal-600 border-none">Publish Post</button>
                 <button type="button" onClick={() => setShowAddPost(false)} className="btn btn-ghost">Cancel</button>
               </div>
             </form>
@@ -413,7 +413,7 @@ function DashboardContent() {
                       <button
                         onClick={() => submitReview(b)}
                         disabled={form.submitting}
-                        className="btn btn-primary btn-sm text-white disabled:opacity-50">
+                        className="btn btn-sm text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-sky-600 hover:to-teal-600 border-none disabled:opacity-50">
                         {form.submitting ? "Submitting..." : "Submit Review"}
                       </button>
                     </div>
