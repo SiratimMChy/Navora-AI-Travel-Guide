@@ -18,18 +18,23 @@ function AsideInner() {
   const router = useRouter();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("theme") || "light";
+      document.documentElement.setAttribute("data-theme", saved);
+      return saved === "dark";
+    }
+    return false;
+  });
 
   const user = session?.user as { role?: string; name?: string } | undefined;
   const isAdmin = user?.role === "admin";
 
   useEffect(() => {
-    const saved = localStorage.getItem("theme") || "light";
-    document.documentElement.setAttribute("data-theme", saved);
-    setIsDark(saved === "dark");
-  }, []);
-
-  useEffect(() => { setMobileOpen(false); }, [pathname]);
+    if (!mobileOpen) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMobileOpen(false);
+  }, [pathname, mobileOpen]);
 
   const handleThemeToggle = () => {
     setIsDark((prev) => {
