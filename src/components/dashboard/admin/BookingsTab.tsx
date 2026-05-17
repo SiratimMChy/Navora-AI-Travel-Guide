@@ -46,13 +46,13 @@ export default function BookingsTab({ bookings, setBookings, loading }: Props) {
                         <button onClick={async () => {
                           const res = await fetch("/api/admin/bookings", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: b._id, action: "confirm" }) });
                           if (res.ok) { setBookings(bookings.map((x) => x._id === b._id ? { ...x, status: "confirmed" } : x)); Swal.fire("Approved!", "Booking confirmed.", "success"); }
-                        }} className="btn btn-xs btn-success text-white">Approve</button>
+                        }} className="btn btn-xs text-white bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 border-0">Approve</button>
                         <button onClick={async () => {
                           const { value: reason, isConfirmed } = await Swal.fire({ title: "Reject Booking", input: "textarea", inputLabel: "Reason for rejection", inputPlaceholder: "Enter reason...", inputAttributes: { "aria-label": "Rejection reason" }, showCancelButton: true, confirmButtonText: "Reject", confirmButtonColor: "#ef4444", inputValidator: (v) => !v.trim() ? "Please provide a reason." : undefined });
                           if (!isConfirmed) return;
                           const res = await fetch("/api/admin/bookings", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: b._id, action: "reject", reason }) });
                           if (res.ok) { setBookings(bookings.map((x) => x._id === b._id ? { ...x, status: "rejected", rejectionReason: reason } : x)); Swal.fire("Rejected", "Booking has been rejected.", "info"); }
-                        }} className="btn btn-xs btn-error text-white">Reject</button>
+                        }} className="btn btn-xs text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 border-0">Reject</button>
                       </div>
                     ) : <span className="text-xs text-base-content/30 italic">—</span>}
                   </td>

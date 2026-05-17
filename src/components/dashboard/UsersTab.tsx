@@ -127,11 +127,11 @@ export default function UsersTab({ users, setUsers, loading }: Props) {
                       <div className="flex gap-1">
                         <button
                           onClick={() => handleStatusToggle(u)}
-                          className={`btn btn-xs text-white ${u.status === "blocked" ? "btn-success" : "btn-warning"}`}
+                          className={`btn btn-xs text-white border-0 ${u.status === "blocked" ? "bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700" : "bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700"}`}
                         >
                           {u.status === "blocked" ? "Unblock" : "Block"}
                         </button>
-                        <button onClick={() => handleDelete(u)} className="btn btn-xs btn-error text-white">
+                        <button onClick={() => handleDelete(u)} className="btn btn-xs text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 border-0">
                           <FaTrash size={11} />
                         </button>
                       </div>
@@ -143,7 +143,7 @@ export default function UsersTab({ users, setUsers, loading }: Props) {
                           setEditRole(u.role);
                           (document.getElementById("role_modal") as HTMLDialogElement)?.showModal();
                         }}
-                        className="btn btn-xs btn-outline"
+                        className="btn btn-xs text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 border-0"
                       >
                         Edit Role
                       </button>
@@ -185,7 +185,7 @@ export default function UsersTab({ users, setUsers, loading }: Props) {
                 <div className="flex gap-2 flex-wrap">
                   <button
                     onClick={() => handleStatusToggle(u)}
-                    className={`btn btn-xs flex-1 text-white ${u.status === "blocked" ? "btn-success" : "btn-warning"}`}
+                    className={`btn btn-xs flex-1 text-white border-0 ${u.status === "blocked" ? "bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700" : "bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700"}`}
                   >
                     {u.status === "blocked" ? "Unblock" : "Block"}
                   </button>
@@ -195,11 +195,11 @@ export default function UsersTab({ users, setUsers, loading }: Props) {
                       setEditRole(u.role);
                       (document.getElementById("role_modal") as HTMLDialogElement)?.showModal();
                     }}
-                    className="btn btn-xs flex-1 btn-outline"
+                    className="btn btn-xs flex-1 text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 border-0"
                   >
                     Edit Role
                   </button>
-                  <button onClick={() => handleDelete(u)} className="btn btn-xs btn-error text-white">
+                  <button onClick={() => handleDelete(u)} className="btn btn-xs text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 border-0">
                     <FaTrash size={11} />
                   </button>
                 </div>
@@ -213,7 +213,7 @@ export default function UsersTab({ users, setUsers, loading }: Props) {
               <button
                 onClick={() => setUserPage((p) => Math.max(1, p - 1))}
                 disabled={userPage === 1}
-                className="btn btn-sm btn-ghost disabled:opacity-40"
+                className="btn btn-sm text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 border-0 disabled:opacity-40"
               >
                 Prev
               </button>
@@ -221,7 +221,7 @@ export default function UsersTab({ users, setUsers, loading }: Props) {
                 <button
                   key={p}
                   onClick={() => setUserPage(p)}
-                  className={`btn btn-sm ${p === userPage ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white border-none" : "btn-ghost"}`}
+                  className={`btn btn-sm ${p === userPage ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white border-0" : "btn-ghost"}`}
                 >
                   {p}
                 </button>
@@ -229,7 +229,7 @@ export default function UsersTab({ users, setUsers, loading }: Props) {
               <button
                 onClick={() => setUserPage((p) => Math.min(totalPages, p + 1))}
                 disabled={userPage === totalPages}
-                className="btn btn-sm btn-ghost disabled:opacity-40"
+                className="btn btn-sm text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 border-0 disabled:opacity-40"
               >
                 Next
               </button>

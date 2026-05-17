@@ -69,7 +69,7 @@ function AsideInner() {
     const hrefTab = hrefQuery ? new URLSearchParams(hrefQuery).get("tab") : null;
     const active = pathname === hrefPath && currentTab === hrefTab;
     return `flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 ${
-      active ? "bg-sky-500 text-white shadow-md" : "text-base-content hover:bg-base-200 hover:text-sky-600"
+      active ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-md" : "text-base-content hover:bg-base-200 hover:text-sky-600"
     } ${isCollapsed ? "justify-center" : ""}`;
   };
 
@@ -79,12 +79,12 @@ function AsideInner() {
       <div className="px-4 pt-6 pb-5 border-b-2 border-base-300 bg-base-100">
         <div className={`flex flex-col ${isCollapsed ? "items-center" : ""}`}>
           {isCollapsed ? (
-            <div className="w-9 h-9 bg-sky-500 rounded-xl flex items-center justify-center shadow-md">
+            <div className="w-9 h-9 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-xl flex items-center justify-center shadow-md">
               <span className="text-white font-bold text-sm">N</span>
             </div>
           ) : (
             <>
-              <Link href="/" className="text-2xl font-lobster font-bold bg-linear-to-r from-sky-500 to-teal-400 bg-clip-text text-transparent leading-tight">
+              <Link href="/" className="text-2xl font-lobster font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent leading-tight">
                 Navora
               </Link>
               <p className="text-xs text-base-content/40 mt-0.5 truncate">{title}</p>
@@ -130,7 +130,7 @@ function AsideInner() {
     <>
       {/* ── MOBILE: top header bar ── */}
       <header className="md:hidden fixed top-0 left-0 right-0 z-40 h-14 bg-base-100 border-b-2 border-base-300 flex items-center justify-between px-4 shadow-sm">
-        <Link href="/" className="text-xl font-lobster font-bold bg-linear-to-r from-sky-500 to-teal-400 bg-clip-text text-transparent">
+        <Link href="/" className="text-xl font-lobster font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
           Navora
         </Link>
         <button

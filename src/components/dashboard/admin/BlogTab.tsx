@@ -78,7 +78,7 @@ export default function BlogTab({ blogPosts, setBlogPosts, loading }: Props) {
                   <td><span className="badge badge-outline capitalize text-xs">{p.category}</span></td>
                   <td className="text-base-content/40 text-xs">{p.createdAt ? new Date(p.createdAt).toLocaleDateString() : "—"}</td>
                   <td>
-                    <button onClick={() => handleDelete(String(p._id))} className="btn btn-ghost btn-sm text-red-400 hover:text-red-600 hover:bg-red-500/10"><FaTrash size={13} /></button>
+                    <button onClick={() => handleDelete(String(p._id))} className="btn btn-sm text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 border-0"><FaTrash size={13} /></button>
                   </td>
                 </tr>
               ))}

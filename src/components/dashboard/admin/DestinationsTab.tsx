@@ -67,7 +67,7 @@ export default function DestinationsTab({ destinations, setDestinations, loading
                   const data = await res.json();
                   if (data.success) setNewDest({ ...newDest, description: data.data });
                 }}
-                className="btn btn-xs bg-linear-to-r from-blue-600 to-cyan-500 text-white border-0 hover:opacity-90 disabled:opacity-40">
+                className="btn btn-xs bg-gradient-to-r from-blue-600 to-cyan-500 text-white border-0 hover:from-blue-700 hover:to-cyan-600 disabled:opacity-40">
                 ✨ Generate with AI
               </button>
             </div>
@@ -111,8 +111,8 @@ export default function DestinationsTab({ destinations, setDestinations, loading
                   <td className="text-sm">⭐ {d.rating}</td>
                   <td>
                     <div className="flex gap-1">
-                      <a href={`/destinations/${d._id}/edit`} className="btn btn-ghost btn-sm text-sky-500 hover:text-sky-700 hover:bg-sky-500/10"><FaEdit size={13} /></a>
-                      <button onClick={() => handleDelete(d._id!)} className="btn btn-ghost btn-sm text-red-400 hover:text-red-600 hover:bg-red-500/10"><FaTrash size={13} /></button>
+                      <a href={`/destinations/${d._id}/edit`} className="btn btn-sm text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 border-0"><FaEdit size={13} /></a>
+                      <button onClick={() => handleDelete(d._id!)} className="btn btn-sm text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 border-0"><FaTrash size={13} /></button>
                     </div>
                   </td>
                 </tr>

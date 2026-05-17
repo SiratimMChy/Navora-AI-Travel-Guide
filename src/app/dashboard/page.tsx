@@ -211,7 +211,7 @@ function DashboardContent() {
                             <button
                               onClick={() => handlePay(b)}
                               disabled={payingId === String(b._id)}
-                              className="btn btn-sm text-white bg-linear-to-r from-blue-600 to-cyan-500 hover:opacity-90 border-0 disabled:opacity-50"
+                              className="btn btn-sm text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 border-0 disabled:opacity-50"
                             >
                               {payingId === String(b._id) ? <span className="loading loading-spinner loading-xs" /> : "💳 Pay Now"}
                             </button>
@@ -281,7 +281,7 @@ function DashboardContent() {
                       const data = await res.json();
                       if (data.success) setNewPost((prev) => ({ ...prev, content: data.data }));
                     }}
-                    className="btn btn-xs bg-linear-to-r from-blue-600 to-cyan-500 text-white border-0 hover:opacity-90 disabled:opacity-40"
+                    className="btn btn-xs bg-gradient-to-r from-blue-600 to-cyan-500 text-white border-0 hover:from-blue-700 hover:to-cyan-600 disabled:opacity-40"
                   >
                     ✨ Generate with AI
                   </button>
@@ -318,7 +318,7 @@ function DashboardContent() {
                       await fetch(`/api/blog/${p._id}`, { method: "DELETE" });
                       setMyPosts((prev) => prev.filter((x) => String(x._id) !== String(p._id)));
                     }}
-                    className="btn btn-ghost btn-sm text-red-400 hover:text-red-600 hover:bg-red-500/10 shrink-0"
+                    className="btn btn-sm text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 border-0 shrink-0"
                   >
                     <FaTrash size={13} />
                   </button>
