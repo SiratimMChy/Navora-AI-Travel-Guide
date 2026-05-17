@@ -84,7 +84,7 @@ function AsideInner() {
             </div>
           ) : (
             <>
-              <Link href="/" className="text-2xl font-lobster font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent leading-tight">
+              <Link href="/" className="text-2xl font-lobster font-bold bg-gradient-to-r from-blue-700 to-cyan-600 bg-clip-text text-transparent leading-tight">
                 Navora
               </Link>
               <p className="text-xs text-base-content/40 mt-0.5 truncate">{title}</p>
