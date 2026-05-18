@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { MdLocationOn, MdEmail, MdPhone } from "react-icons/md";
 
 export default function Footer() {
   const pathname = usePathname();
@@ -19,9 +20,18 @@ export default function Footer() {
             AI-powered travel guide.<br />Explore Asia and beyond.
           </p>
           <ul className="mt-3 space-y-1 text-white/60 text-sm">
-            <li>📍 Dhaka, Bangladesh</li>
-            <li>📧 support@navora.com</li>
-            <li>📞 +880 1700-000000</li>
+            <li className="flex items-center gap-2">
+              <MdLocationOn className="text-sky-400" size={18} />
+              Dhaka, Bangladesh
+            </li>
+            <li className="flex items-center gap-2">
+              <MdEmail className="text-sky-400" size={18} />
+              support@navora.com
+            </li>
+            <li className="flex items-center gap-2">
+              <MdPhone className="text-sky-400" size={18} />
+              +880 1700-000000
+            </li>
           </ul>
         </aside>
 
