@@ -13,9 +13,14 @@
 [![DaisyUI](https://img.shields.io/badge/DaisyUI-5.5.19-5A0EF8?style=flat&logo=daisyui&logoColor=white)](https://daisyui.com/)
 
 <div align="center">
-  <a href="https://navora-five.vercel.app" target="_blank">
-    ![Live Demo](https://img.shields.io/badge/NAVORA-LIVE%20DEMO-0EA5E9?style=for-the-badge&logo=vercel&logoColor=white&labelColor=111827)
-  </a>
+
+<a href="https://navora-five.vercel.app" target="_blank">
+  <img 
+    src="https://img.shields.io/badge/View-Live%20Demo-111827?style=for-the-badge&logo=vercel&logoColor=white&color=06B6D4"
+    alt="Live Demo"
+  />
+</a>
+
 </div>
 
 </div>
