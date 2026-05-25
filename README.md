@@ -135,53 +135,7 @@ Unlike traditional travel booking platforms, Navora stands out by:
 
 Navora follows a modern full-stack architecture with clear separation of concerns:
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    FRONTEND - REACT (Next.js)               │
-│  ┌────────────────────────────────────────────────────────┐ │
-│  │   React 19.2.3 + Next.js 16.1.7 (App Router)          │ │
-│  │   - Server Components & Client Components             │ │
-│  │   - TypeScript for type safety                        │ │
-│  │   - TailwindCSS + DaisyUI for styling                 │ │
-│  │   - NextAuth.js for authentication                    │ │
-│  │   - Axios for HTTP requests                           │ │
-│  └────────────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────┘
-                          ↕ REST API (HTTPS)
-┌─────────────────────────────────────────────────────────────┐
-│              BACKEND - Next.js API Routes                   │
-│  ┌────────────────────────────────────────────────────────┐ │
-│  │   Node.js 20.x Runtime                                │ │
-│  │   - RESTful API Endpoints                             │ │
-│  │   - Business Logic & Validation                       │ │
-│  │   - NextAuth.js Authentication                        │ │
-│  │   - Mongoose ODM Integration                          │ │
-│  │   - Stripe Payment Processing                         │ │
-│  │   - Groq AI Integration                               │ │
-│  └────────────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────┘
-                          ↕ MongoDB Driver
-┌─────────────────────────────────────────────────────────────┐
-│              DATABASE - MongoDB Atlas                       │
-│  ┌────────────────────────────────────────────────────────┐ │
-│  │   Cloud NoSQL Database                                │ │
-│  │   - Users Collection                                  │ │
-│  │   - Destinations Collection                           │ │
-│  │   - Bookings Collection                               │ │
-│  │   - Reviews Collection                                │ │
-│  │   - BlogPosts Collection                              │ │
-│  │   - Flexible JSON-like Documents                      │ │
-│  └────────────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────┘
-                          ↕ External Services
-┌─────────────────────────────────────────────────────────────┐
-│              EXTERNAL SERVICES                              │
-│  ┌──────────────────┬──────────────────┬──────────────────┐ │
-│  │  Stripe Payment  │  Groq AI Engine  │  Google OAuth    │ │
-│  │  Processing      │  (LLaMA 3.3 70B) │  Authentication  │ │
-│  └──────────────────┴──────────────────┴──────────────────┘ │
-└─────────────────────────────────────────────────────────────┘
-```
+<img width="1440" height="1480" alt="image" src="https://github.com/user-attachments/assets/147f209d-72e1-49e7-8545-5a4a2799ce5d" />
 
 ### Data Flow
 
