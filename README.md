@@ -135,7 +135,37 @@ Unlike traditional travel booking platforms, Navora stands out by:
 
 Navora follows a modern full-stack architecture with clear separation of concerns:
 
-<img width="1440" height="1480" alt="image" src="https://github.com/user-attachments/assets/147f209d-72e1-49e7-8545-5a4a2799ce5d" />
+```mermaid
+flowchart TB
+    subgraph Client ["Frontend (Next.js App Router)"]
+        UI["React UI (Tailwind CSS + DaisyUI)"]
+        State["State Management & Client Fetching"]
+    end
+
+    subgraph Server ["Backend (Next.js API & Server Actions)"]
+        API["REST API Routes"]
+        Auth["NextAuth.js (Session & Security)"]
+        ODM["Mongoose (Data Models)"]
+    end
+
+    subgraph DB ["Database"]
+        Mongo[("MongoDB Atlas\n(NoSQL Cloud Database)")]
+    end
+
+    subgraph Ext ["External Services"]
+        Stripe["Stripe (Payment Gateway)"]
+        Groq["Groq AI (LLaMA 3.3)"]
+        OAuth["Google OAuth (Authentication)"]
+    end
+
+    UI <-->|HTTP Requests| API
+    UI -->|Login Request| Auth
+    Auth <-->|Token Exchange| OAuth
+    API <-->|Schema Validation| ODM
+    ODM <-->|Read / Write| Mongo
+    API <-->|Payment Intents| Stripe
+    API <-->|AI Prompts| Groq
+```
 
 ### Data Flow
 
