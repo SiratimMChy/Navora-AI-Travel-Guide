@@ -809,25 +809,6 @@ The above copyright notice and this permission notice shall be included in all c
 
 ---
 
-## 📧 Contact
-
-**Project Maintainer**: Siratim Mustakim Chowdhury
-
-- 📧 **Email**: [chowdhurysiratimmustakim@gmail.com](mailto:chowdhurysiratimmustakim@gmail.com)
-- 🐙 **GitHub**: [@SiratimMChy](https://github.com/SiratimMChy)
-- 💼 **LinkedIn**: [Siratim Mustakim Chowdhury](https://www.linkedin.com/in/siratim-mustakim-chowdhury/)
-
-### Support & Questions
-
-For questions, issues, or feature requests:
-
-1. **Check Existing Issues**: Browse the [Issues](https://github.com/SiratimMChy/navora/issues) page
-2. **Create New Issue**: Open a new issue with detailed information
-3. **Email Support**: Contact via email for urgent matters
-4. **Discussions**: Join discussions for general questions
-
----
-
 ## 🙏 Acknowledgments
 
 ### Technologies & Libraries
