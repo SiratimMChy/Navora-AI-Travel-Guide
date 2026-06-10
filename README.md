@@ -859,10 +859,9 @@ The above copyright notice and this permission notice shall be included in all c
 
 <div align="center">
 
-**Made with ❤️ by Siratim Mustakim Chowdhury**
+**Made by Siratim Mustakim Chowdhury**
 
-⭐ **Star this repository if you find it helpful!**
-
-**[🌍 Visit Navora](https://navora-five.vercel.app)** | **[📧 Contact Me](mailto:chowdhurysiratimmustakim@gmail.com)** | **[🐙 GitHub](https://github.com/SiratimMChy)**
-
+[![GitHub](https://img.shields.io/badge/GitHub-SiratimMChy-181717?style=flat&logo=github)](https://github.com/SiratimMChy)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Siratim%20Mustakim-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/siratim-mustakim-chowdhury/)
+[![Email](https://img.shields.io/badge/Email-chowdhurysiratimmustakim@gmail.com-D14836?style=flat&logo=gmail&logoColor=white)](mailto:chowdhurysiratimmustakim@gmail.com)
 </div>
