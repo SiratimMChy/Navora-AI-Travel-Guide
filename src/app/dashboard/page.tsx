@@ -140,23 +140,7 @@ function DashboardContent() {
         ))}
       </div>
 
-      {/* Tab bar — mobile only */}
-      <div className="flex gap-1 mb-6 bg-base-200 p-1 rounded-xl border border-base-300 w-full overflow-x-auto md:hidden">
-        {tabs.map(({ key, label, icon }) => (
-          <button
-            key={key}
-            onClick={() => setTab(key)}
-            className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
-              tab === key
-                ? "bg-sky-500 text-white shadow-sm"
-                : "text-base-content/60 hover:text-base-content"
-            }`}
-          >
-            <span>{icon}</span>
-            <span>{label}</span>
-          </button>
-        ))}
-      </div>
+
 
       {/* Tab content */}
       {tab === "profile" && <ProfileTab />}

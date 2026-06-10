@@ -65,26 +65,42 @@ export default function BlogTab({ blogPosts, setBlogPosts, loading }: Props) {
           <p>No blog posts yet. Add your first one!</p>
         </div>
       ) : (
-        <div className="bg-base-200 border border-base-300 rounded-2xl shadow-md overflow-x-auto">
-          <table className="table w-full">
-            <thead className="bg-base-300 text-base-content/70 text-sm">
-              <tr><th>Title</th><th>Author</th><th>Category</th><th>Date</th><th>Actions</th></tr>
-            </thead>
-            <tbody>
-              {blogPosts.map((p) => (
-                <tr key={String(p._id)} className="hover:bg-base-300/50 border-b border-base-300">
-                  <td className="font-semibold text-base-content max-w-xs truncate">{p.title}</td>
-                  <td className="text-base-content/60 text-sm">{p.author}</td>
-                  <td><span className="badge badge-outline capitalize text-xs">{p.category}</span></td>
-                  <td className="text-base-content/40 text-xs">{p.createdAt ? new Date(p.createdAt).toLocaleDateString() : "—"}</td>
-                  <td>
-                    <button onClick={() => handleDelete(String(p._id))} className="btn btn-sm text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 border-0"><FaTrash size={13} /></button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <>
+          <div className="hidden md:block bg-base-200 border border-base-300 rounded-2xl shadow-md overflow-x-auto">
+            <table className="table w-full">
+              <thead className="bg-base-300 text-base-content/70 text-sm">
+                <tr><th>Title</th><th>Author</th><th>Category</th><th>Date</th><th>Actions</th></tr>
+              </thead>
+              <tbody>
+                {blogPosts.map((p) => (
+                  <tr key={String(p._id)} className="hover:bg-base-300/50 border-b border-base-300">
+                    <td className="font-semibold text-base-content max-w-xs truncate">{p.title}</td>
+                    <td className="text-base-content/60 text-sm">{p.author}</td>
+                    <td><span className="badge badge-outline capitalize text-xs">{p.category}</span></td>
+                    <td className="text-base-content/40 text-xs">{p.createdAt ? new Date(p.createdAt).toLocaleDateString() : "—"}</td>
+                    <td>
+                      <button onClick={() => handleDelete(String(p._id))} className="btn btn-sm text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 border-0"><FaTrash size={13} /></button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {/* Mobile cards */}
+          <div className="md:hidden space-y-3">
+            {blogPosts.map((p) => (
+              <div key={String(p._id)} className="bg-base-200 border border-base-300 rounded-xl p-4 shadow-sm">
+                <p className="font-bold text-base-content mb-2">{p.title}</p>
+                <div className="flex flex-col gap-1 text-xs text-base-content/60 mb-4">
+                  <p>👤 <span className="font-medium text-base-content/80">Author:</span> {p.author}</p>
+                  <p>🏷️ <span className="font-medium text-base-content/80">Category:</span> <span className="badge badge-sm badge-outline capitalize">{p.category}</span></p>
+                  <p>📅 <span className="font-medium text-base-content/80">Date:</span> {p.createdAt ? new Date(p.createdAt).toLocaleDateString() : "—"}</p>
+                </div>
+                <button onClick={() => handleDelete(String(p._id))} className="btn btn-sm btn-block text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 border-0 gap-2"><FaTrash size={13} /> Delete Post</button>
+              </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );

@@ -88,50 +88,96 @@ export default function DestinationsTab({ destinations, setDestinations, loading
           <p>No destinations yet. Add your first one!</p>
         </div>
       ) : (
-        <div className="bg-base-200 border border-base-300 rounded-2xl shadow-md overflow-x-auto">
-          <table className="table w-full">
-            <thead className="bg-base-300 text-base-content/70 text-sm">
-              <tr><th>Destination</th><th>Category</th><th>Price</th><th>Rating</th><th>Actions</th></tr>
-            </thead>
-            <tbody>
-              {destinations.slice((destPage - 1) * DEST_PER_PAGE, destPage * DEST_PER_PAGE).map((d) => (
-                <tr key={d._id} className="hover:bg-base-300/50 border-b border-base-300">
-                  <td>
-                    <div className="flex items-center gap-3">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={d.image} alt="" className="w-12 h-12 rounded-xl object-cover" />
-                      <div>
-                        <p className="font-semibold text-base-content">{d.title}</p>
-                        <p className="text-xs text-base-content/40">{d.location}, {d.country}</p>
+        <>
+          <div className="hidden md:block bg-base-200 border border-base-300 rounded-2xl shadow-md overflow-x-auto">
+            <table className="table w-full">
+              <thead className="bg-base-300 text-base-content/70 text-sm">
+                <tr><th>Destination</th><th>Category</th><th>Price</th><th>Rating</th><th>Actions</th></tr>
+              </thead>
+              <tbody>
+                {destinations.slice((destPage - 1) * DEST_PER_PAGE, destPage * DEST_PER_PAGE).map((d) => (
+                  <tr key={d._id} className="hover:bg-base-300/50 border-b border-base-300">
+                    <td>
+                      <div className="flex items-center gap-3">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={d.image} alt="" className="w-12 h-12 rounded-xl object-cover" />
+                        <div>
+                          <p className="font-semibold text-base-content">{d.title}</p>
+                          <p className="text-xs text-base-content/40">{d.location}, {d.country}</p>
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                  <td><span className="badge badge-outline capitalize text-xs">{d.category}</span></td>
-                  <td className="font-bold text-sky-600">${d.price}</td>
-                  <td className="text-sm">⭐ {d.rating}</td>
-                  <td>
-                    <div className="flex gap-1">
-                      <a href={`/destinations/${d._id}/edit`} className="btn btn-sm text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 border-0"><FaEdit size={13} /></a>
-                      <button onClick={() => handleDelete(d._id!)} className="btn btn-sm text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 border-0"><FaTrash size={13} /></button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          {totalPages > 1 && (
-            <div className="flex items-center justify-between px-5 py-3 border-t border-base-300">
-              <p className="text-xs text-base-content/50">Showing {(destPage - 1) * DEST_PER_PAGE + 1}–{Math.min(destPage * DEST_PER_PAGE, destinations.length)} of {destinations.length}</p>
-              <div className="flex gap-1">
-                <button onClick={() => setDestPage((p) => Math.max(1, p - 1))} disabled={destPage === 1} className="btn btn-xs btn-outline disabled:opacity-40">‹</button>
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-                  <button key={p} onClick={() => setDestPage(p)} className={`btn btn-xs ${destPage === p ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white border-none" : "btn-outline"}`}>{p}</button>
+                    </td>
+                    <td><span className="badge badge-outline capitalize text-xs">{d.category}</span></td>
+                    <td className="font-bold text-sky-600">${d.price}</td>
+                    <td className="text-sm">⭐ {d.rating}</td>
+                    <td>
+                      <div className="flex gap-1">
+                        <a href={`/destinations/${d._id}/edit`} className="btn btn-sm text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 border-0"><FaEdit size={13} /></a>
+                        <button onClick={() => handleDelete(d._id!)} className="btn btn-sm text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 border-0"><FaTrash size={13} /></button>
+                      </div>
+                    </td>
+                  </tr>
                 ))}
-                <button onClick={() => setDestPage((p) => Math.min(totalPages, p + 1))} disabled={destPage === totalPages} className="btn btn-xs btn-outline disabled:opacity-40">›</button>
+              </tbody>
+            </table>
+            {totalPages > 1 && (
+              <div className="flex items-center justify-between px-5 py-3 border-t border-base-300">
+                <p className="text-xs text-base-content/50">Showing {(destPage - 1) * DEST_PER_PAGE + 1}–{Math.min(destPage * DEST_PER_PAGE, destinations.length)} of {destinations.length}</p>
+                <div className="flex gap-1">
+                  <button onClick={() => setDestPage((p) => Math.max(1, p - 1))} disabled={destPage === 1} className="btn btn-xs btn-outline disabled:opacity-40">‹</button>
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                    <button key={p} onClick={() => setDestPage(p)} className={`btn btn-xs ${destPage === p ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white border-none" : "btn-outline"}`}>{p}</button>
+                  ))}
+                  <button onClick={() => setDestPage((p) => Math.min(totalPages, p + 1))} disabled={destPage === totalPages} className="btn btn-xs btn-outline disabled:opacity-40">›</button>
+                </div>
               </div>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+          
+          {/* Mobile cards */}
+          <div className="md:hidden space-y-3">
+            {destinations.slice((destPage - 1) * DEST_PER_PAGE, destPage * DEST_PER_PAGE).map((d) => (
+              <div key={d._id} className="bg-base-200 border border-base-300 rounded-xl p-4 shadow-sm">
+                <div className="flex items-center gap-3 mb-3">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={d.image} alt="" className="w-16 h-16 rounded-xl object-cover shrink-0" />
+                  <div className="flex-1 min-w-0">
+                    <p className="font-bold text-base-content truncate">{d.title}</p>
+                    <p className="text-xs text-base-content/40 truncate">{d.location}, {d.country}</p>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-2 mb-3 text-sm">
+                  <div>
+                    <p className="text-xs text-base-content/40 mb-1">Category</p>
+                    <span className="badge badge-outline capitalize text-xs">{d.category}</span>
+                  </div>
+                  <div>
+                    <p className="text-xs text-base-content/40 mb-1">Price & Rating</p>
+                    <p className="font-bold text-sky-600">${d.price} <span className="text-sm text-base-content font-normal ml-1">⭐ {d.rating}</span></p>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <a href={`/destinations/${d._id}/edit`} className="btn btn-sm flex-1 text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 border-0 gap-2"><FaEdit size={13} /> Edit</a>
+                  <button onClick={() => handleDelete(d._id!)} className="btn btn-sm flex-1 text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 border-0 gap-2"><FaTrash size={13} /> Delete</button>
+                </div>
+              </div>
+            ))}
+            
+            {/* Mobile Pagination */}
+            {totalPages > 1 && (
+              <div className="flex flex-col items-center gap-3 pt-2">
+                <p className="text-xs text-base-content/50">Showing {(destPage - 1) * DEST_PER_PAGE + 1}–{Math.min(destPage * DEST_PER_PAGE, destinations.length)} of {destinations.length}</p>
+                <div className="flex gap-1">
+                  <button onClick={() => setDestPage((p) => Math.max(1, p - 1))} disabled={destPage === 1} className="btn btn-sm btn-outline disabled:opacity-40">Prev</button>
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                    <button key={p} onClick={() => setDestPage(p)} className={`btn btn-sm ${destPage === p ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white border-none" : "btn-outline"}`}>{p}</button>
+                  ))}
+                  <button onClick={() => setDestPage((p) => Math.min(totalPages, p + 1))} disabled={destPage === totalPages} className="btn btn-sm btn-outline disabled:opacity-40">Next</button>
+                </div>
+              </div>
+            )}
+          </div>
+        </>
       )}
     </div>
   );

@@ -18,23 +18,22 @@ function AsideInner() {
   const router = useRouter();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [isDark, setIsDark] = useState(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("theme") || "light";
-      document.documentElement.setAttribute("data-theme", saved);
-      return saved === "dark";
-    }
-    return false;
-  });
+  const [isDark, setIsDark] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const saved = localStorage.getItem("theme") || "light";
+    setIsDark(saved === "dark");
+    document.documentElement.setAttribute("data-theme", saved);
+  }, []);
 
   const user = session?.user as { role?: string; name?: string } | undefined;
   const isAdmin = user?.role === "admin";
 
   useEffect(() => {
-    if (!mobileOpen) return;
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMobileOpen(false);
-  }, [pathname, mobileOpen]);
+  }, [pathname, searchParams]);
 
   const handleThemeToggle = () => {
     setIsDark((prev) => {
@@ -81,7 +80,7 @@ function AsideInner() {
   const sidebarContent = (
     <>
       {/* Brand */}
-      <div className="px-4 pt-6 pb-5 border-b-2 border-base-300 bg-base-100">
+      <div className="px-4 pt-6 pb-5 border-b-2 border-base-300 bg-base-100 flex justify-between items-start">
         <div className={`flex flex-col ${isCollapsed ? "items-center" : ""}`}>
           {isCollapsed ? (
             <div className="w-9 h-9 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-xl flex items-center justify-center shadow-md">
@@ -97,6 +96,13 @@ function AsideInner() {
             </>
           )}
         </div>
+        {/* Mobile Close Button inside sidebar */}
+        <button
+          className="md:hidden p-2 rounded-xl hover:bg-base-200 transition-colors active:scale-95 text-base-content"
+          onClick={() => setMobileOpen(false)}
+        >
+          <X size={20} />
+        </button>
       </div>
 
       {/* Nav */}
@@ -116,8 +122,8 @@ function AsideInner() {
           className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-base-content hover:bg-base-200 hover:text-sky-600 border-2 border-base-300 hover:border-sky-200 transition-all ${isCollapsed ? "justify-center" : ""}`}
           title={isCollapsed ? (isDark ? "Light Mode" : "Dark Mode") : ""}
         >
-          {isDark ? <Sun size={17} /> : <Moon size={17} />}
-          {!isCollapsed && <span>{isDark ? "Light Mode" : "Dark Mode"}</span>}
+          {mounted ? (isDark ? <Sun size={17} /> : <Moon size={17} />) : <Sun size={17} className="invisible" />}
+          {!isCollapsed && <span>{mounted ? (isDark ? "Light Mode" : "Dark Mode") : "Theme"}</span>}
         </button>
         <button
           onClick={() => router.push("/")}
@@ -134,40 +140,33 @@ function AsideInner() {
   return (
     <>
       {/* ── MOBILE: top header bar ── */}
-      <header className="md:hidden fixed top-0 left-0 right-0 z-40 h-14 bg-base-100 border-b-2 border-base-300 flex items-center justify-between px-4 shadow-sm">
+      <header className="md:hidden fixed top-0 left-0 right-0 z-40 h-14 bg-base-100 border-b-2 border-base-300 flex items-center justify-between px-4 shadow-md">
         <Link href="/" className="text-xl font-lobster font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
           Navora
         </Link>
         <button
-          onClick={() => setMobileOpen(true)}
-          aria-label="Open menu"
-          className="p-2 rounded-xl hover:bg-base-200 transition-colors"
+          onClick={() => setMobileOpen((prev) => !prev)}
+          aria-label="Toggle menu"
+          className="p-2 rounded-xl hover:bg-base-200 transition-colors active:scale-95"
         >
-          <Menu size={22} className="text-base-content" />
+          {mobileOpen ? null : <Menu size={22} className="text-base-content" />}
         </button>
       </header>
 
       {/* ── MOBILE: drawer backdrop ── */}
       {mobileOpen && (
         <div
-          className="md:hidden fixed inset-0 bg-black/50 z-40 backdrop-blur-sm"
+          className="md:hidden fixed inset-0 bg-black/50 z-50 backdrop-blur-sm animate-in fade-in duration-200"
           onClick={() => setMobileOpen(false)}
         />
       )}
 
       {/* ── MOBILE: slide-in drawer ── */}
       <div
-        className={`md:hidden fixed top-0 left-0 h-full w-72 z-50 flex flex-col bg-base-200 border-r-2 border-base-300 shadow-2xl transition-transform duration-300 ${
+        className={`md:hidden fixed top-0 left-0 bottom-0 w-72 z-50 flex flex-col bg-base-200 border-r-2 border-base-300 shadow-2xl transition-transform duration-300 ${
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <button
-          onClick={() => setMobileOpen(false)}
-          className="absolute top-3 right-3 p-1.5 rounded-full hover:bg-base-300 transition-colors z-10"
-          aria-label="Close menu"
-        >
-          <X size={18} className="text-base-content/60" />
-        </button>
         {sidebarContent}
       </div>
 

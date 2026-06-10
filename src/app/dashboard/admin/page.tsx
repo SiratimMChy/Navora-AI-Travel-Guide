@@ -77,15 +77,7 @@ function AdminDashboardInner() {
   return (
     <div className="min-h-screen bg-base-100 p-4 md:p-6">
       <div className="max-w-7xl mx-auto flex flex-col gap-6">
-        {/* Mobile tab bar */}
-        <div className="flex gap-1 bg-base-200 p-1 rounded-xl border border-base-300 w-full overflow-x-auto md:hidden">
-          {tabs.map(({ key, label, icon }) => (
-            <button key={key} onClick={() => router.push(`/dashboard/admin${key === "overview" ? "" : `?tab=${key}`}`)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all ${tab === key ? "bg-sky-500 text-white shadow-sm" : "text-base-content/60 hover:text-base-content"}`}>
-              <span>{icon}</span><span className="hidden sm:inline">{label}</span>
-            </button>
-          ))}
-        </div>
+
 
         <div className="space-y-6">
           {tab === "overview" && <OverviewTab stats={stats} bookingChartData={bookingChartData} bookings={bookings} />}
