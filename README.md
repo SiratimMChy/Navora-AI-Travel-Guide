@@ -16,7 +16,7 @@
 
 <a href="https://navora-five.vercel.app" target="_blank">
   <img 
-    src="https://img.shields.io/badge/%20NAVORA-LIVE%20DEMO-0EA5E9?style=for-the-badge&logo=vercel&logoColor=white&labelColor=0F172A"
+    src="https://img.shields.io/badge/🌍%20NAVORA-LIVE%20DEMO-0EA5E9?style=for-the-badge&logo=vercel&logoColor=white&labelColor=0F172A"
     alt="NAVORA Live Demo"
   />
 </a>
