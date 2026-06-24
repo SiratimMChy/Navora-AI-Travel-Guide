@@ -14,7 +14,7 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-base-100">
-      <div className="bg-sky-800 dark:bg-sky-950 text-white py-16 px-4 text-center">
+      <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white py-16 px-4 text-center">
         <h1 className="text-5xl font-bold mb-3">Contact Us</h1>
         <p className="text-sky-100 text-lg">We&apos;d love to hear from you. Send us a message!</p>
       </div>

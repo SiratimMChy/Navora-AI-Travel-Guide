@@ -22,7 +22,7 @@ export default async function BlogPage() {
 
   return (
     <div className="min-h-screen bg-base-100">
-      <div className="bg-sky-800 dark:bg-sky-950 text-white py-10 sm:py-16 px-4 text-center relative">
+      <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white py-10 sm:py-16 px-4 text-center relative">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3">Travel Blog</h1>
         <p className="text-sky-100 text-base sm:text-lg">Inspiration, tips, and guides for every kind of traveler</p>
         <div className="mt-5">

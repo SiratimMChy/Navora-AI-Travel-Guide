@@ -164,34 +164,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Technology Stack */}
-      <section className="py-16 px-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950 dark:to-cyan-950 rounded-3xl p-10 md:p-12 shadow-xl border border-blue-200 dark:border-blue-800">
-            <h2 className="text-3xl md:text-4xl font-bold text-base-content mb-6 text-center">Built with Modern Technology</h2>
-            <p className="text-base-content/70 text-center mb-8 text-lg">
-              Navora is powered by industry-leading technologies to ensure speed, security, and reliability.
-            </p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {[
-                { name: "Next.js 16", desc: "React Framework" },
-                { name: "MongoDB", desc: "Database" },
-                { name: "Stripe", desc: "Payments" },
-                { name: "Groq AI", desc: "AI Engine" },
-                { name: "NextAuth", desc: "Authentication" },
-                { name: "Vercel", desc: "Hosting" },
-                { name: "Tailwind CSS", desc: "Styling" },
-                { name: "TypeScript", desc: "Type Safety" },
-              ].map((tech) => (
-                <div key={tech.name} className="bg-white dark:bg-gray-900 rounded-xl p-4 text-center border border-blue-200 dark:border-blue-800">
-                  <div className="font-bold text-base-content mb-1">{tech.name}</div>
-                  <div className="text-xs text-base-content/60">{tech.desc}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* Call to Action */}
       <section className="py-20 px-4 bg-gradient-to-r from-blue-600 to-cyan-600">

@@ -47,7 +47,7 @@ function ExploreContent() {
   return (
     <div className="min-h-screen bg-base-100">
       {/* Header */}
-      <div className="bg-sky-800 dark:bg-sky-950 text-white py-10 sm:py-16 px-4 text-center">        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3">Explore Destinations</h1>
+      <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white py-10 sm:py-16 px-4 text-center">        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3">Explore Destinations</h1>
         <p className="text-sky-100 text-base sm:text-lg">Discover {total}+ amazing places around the world</p>
       </div>
 
