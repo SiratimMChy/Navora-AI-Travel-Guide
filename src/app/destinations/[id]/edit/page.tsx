@@ -4,7 +4,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Swal from "sweetalert2";
 import { FaPlus, FaTrash } from "react-icons/fa";
-
+import Image from "next/image";
 const categories = ["beach", "mountain", "city", "adventure", "cruise"];
 
 export default function EditDestinationPage() {
@@ -141,8 +141,7 @@ export default function EditDestinationPage() {
                     required={i === 0}
                   />
                   {img && (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={img} alt="" className="w-12 h-10 rounded-lg object-cover shrink-0 border border-base-300" />
+                    <Image src={img} alt="" width={48} height={40} className="w-12 h-10 rounded-lg object-cover shrink-0 border border-base-300" />
                   )}
                   {images.length > 1 && (
                     <button type="button" onClick={() => setImages(images.filter((_, idx) => idx !== i))}

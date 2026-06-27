@@ -3,7 +3,7 @@ import BlogPostModel from "@/models/BlogPost";
 import { notFound } from "next/navigation";
 import { FaCalendar, FaUser, FaClock, FaArrowLeft } from "react-icons/fa";
 import Link from "next/link";
-
+import Image from "next/image";
 export default async function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
@@ -19,8 +19,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
     <main className="min-h-screen bg-base-100">
       {/* Hero image */}
       <div className="relative h-64 sm:h-80 md:h-96 w-full overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={post.image} alt={post.title} className="w-full h-full object-cover brightness-75" />
+        <Image src={post.image} alt={post.title} fill sizes="100vw" className="object-cover brightness-75" priority />
         <div className="absolute inset-0 bg-linear-to-t from-black/70 to-transparent" />
         <div className="absolute bottom-6 left-0 right-0 px-4 max-w-3xl mx-auto">
           <span className="inline-block bg-sky-500 text-white text-xs font-bold px-3 py-1 rounded-full mb-3 capitalize">

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { FaPlus, FaTrash, FaEdit, FaMapMarkerAlt } from "react-icons/fa";
 import { Destination } from "@/types";
 import Swal from "sweetalert2";
-
+import Image from "next/image";
 const emptyDest = { title: "", location: "", country: "", category: "beach", price: 0, description: "", image: "", duration: "" };
 const DEST_PER_PAGE = 5;
 
@@ -99,8 +99,7 @@ export default function DestinationsTab({ destinations, setDestinations, loading
                   <tr key={d._id} className="hover:bg-base-300/50 border-b border-base-300">
                     <td>
                       <div className="flex items-center gap-3">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={d.image} alt="" className="w-12 h-12 rounded-xl object-cover" />
+                        <Image src={d.image} alt="" width={48} height={48} className="w-12 h-12 rounded-xl object-cover" />
                         <div>
                           <p className="font-semibold text-base-content">{d.title}</p>
                           <p className="text-xs text-base-content/40">{d.location}, {d.country}</p>
@@ -139,8 +138,7 @@ export default function DestinationsTab({ destinations, setDestinations, loading
             {destinations.slice((destPage - 1) * DEST_PER_PAGE, destPage * DEST_PER_PAGE).map((d) => (
               <div key={d._id} className="bg-base-200 border border-base-300 rounded-xl p-4 shadow-sm">
                 <div className="flex items-center gap-3 mb-3">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={d.image} alt="" className="w-16 h-16 rounded-xl object-cover shrink-0" />
+                  <Image src={d.image} alt="" width={64} height={64} className="w-16 h-16 rounded-xl object-cover shrink-0" />
                   <div className="flex-1 min-w-0">
                     <p className="font-bold text-base-content truncate">{d.title}</p>
                     <p className="text-xs text-base-content/40 truncate">{d.location}, {d.country}</p>

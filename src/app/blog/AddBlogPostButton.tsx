@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FaPlus, FaImage } from "react-icons/fa";
 import Swal from "sweetalert2";
-
+import Image from "next/image";
 export default function AddBlogPostButton() {
   const { data: session } = useSession();
   const router = useRouter();
@@ -88,13 +88,12 @@ export default function AddBlogPostButton() {
             <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleImageChange} />
             <div
               onClick={() => fileRef.current?.click()}
-              className="w-full h-36 rounded-xl border-2 border-dashed border-gray-300 hover:border-sky-400 cursor-pointer flex items-center justify-center overflow-hidden transition"
+              className="w-full h-36 relative rounded-xl border-2 border-dashed border-gray-300 hover:border-sky-400 cursor-pointer flex items-center justify-center overflow-hidden transition"
             >
               {uploading ? (
                 <span className="text-sm text-gray-400 animate-pulse">Uploading...</span>
               ) : preview ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={preview} alt="preview" className="w-full h-full object-cover rounded-xl" />
+                <Image src={preview} alt="preview" fill className="object-cover rounded-xl" />
               ) : (
                 <div className="text-center text-gray-400">
                   <FaImage size={28} className="mx-auto mb-1" />

@@ -7,7 +7,7 @@ import { FaPlane, FaUser, FaStar, FaCalendar, FaMapMarkerAlt, FaNewspaper, FaPlu
 import { Booking, BlogPost } from "@/types";
 import { Suspense } from "react";
 import Swal from "sweetalert2";
-
+import Image from "next/image";
 type BookingWithDest = Booking & {
   destinationId: { title: string; image: string; location: string; country: string };
   rejectionReason?: string;
@@ -163,8 +163,7 @@ function DashboardContent() {
             <div className="space-y-4">
               {bookings.map((b) => (
                 <div key={String(b._id)} className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-5 bg-base-100 border border-base-300 rounded-2xl hover:shadow-md transition-shadow">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={b.destinationId?.image} alt="" className="w-20 h-20 rounded-xl object-cover shrink-0" />
+                  <Image src={b.destinationId?.image || ''} alt="" width={80} height={80} className="w-20 h-20 rounded-xl object-cover shrink-0" />
                   <div className="flex-1 min-w-0">
                     <p className="font-bold text-base-content text-lg truncate">{b.destinationId?.title}</p>
                     <p className="text-base-content/50 text-sm flex items-center gap-1 mt-0.5">
@@ -289,8 +288,7 @@ function DashboardContent() {
             <div className="space-y-3">
               {myPosts.map((p) => (
                 <div key={String(p._id)} className="flex items-center gap-4 bg-base-100 border border-base-300 rounded-2xl p-4">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={p.image} alt={p.title} className="w-16 h-16 rounded-xl object-cover shrink-0" />
+                  <Image src={p.image} alt={p.title} width={64} height={64} className="w-16 h-16 rounded-xl object-cover shrink-0" />
                   <div className="flex-1 min-w-0">
                     <p className="font-bold text-base-content truncate">{p.title}</p>
                     <p className="text-base-content/50 text-xs mt-0.5">{p.category} · {p.readTime}</p>
@@ -359,8 +357,7 @@ function DashboardContent() {
                     <div key={String(b._id)} className="bg-base-100 border border-base-300 rounded-2xl p-5 space-y-4">
                       {/* Destination info */}
                       <div className="flex items-center gap-4">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={b.destinationId?.image} alt="" className="w-16 h-16 rounded-xl object-cover shrink-0" />
+                        <Image src={b.destinationId?.image || ''} alt="" width={64} height={64} className="w-16 h-16 rounded-xl object-cover shrink-0" />
                         <div>
                           <p className="font-bold text-base-content">{b.destinationId?.title}</p>
                           <p className="text-base-content/50 text-sm flex items-center gap-1">

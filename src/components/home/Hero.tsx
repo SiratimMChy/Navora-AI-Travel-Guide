@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import Image from "next/image";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -64,11 +65,14 @@ export default function Hero() {
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
             <div className="relative h-56 sm:h-72 md:h-96 lg:h-[480px]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={slide.img}
                 alt={`${slide.title} - Navora`}
-                className="w-full h-full object-cover brightness-75"
+                fill
+                priority={index === 0}
+                sizes="100vw"
+                unoptimized
+                className="object-cover brightness-75"
               />
               <div className="absolute inset-0 bg-linear-to-b from-black/30 via-transparent to-black/70" />
 

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FaCalendar, FaUser } from "react-icons/fa";
 import { BlogPost } from "@/types";
-
+import Image from "next/image";
 export default function Blog({ posts }: { posts: BlogPost[] }) {
   if (!posts.length) return null;
 
@@ -17,8 +17,7 @@ export default function Blog({ posts }: { posts: BlogPost[] }) {
             <Link key={String(post._id)} href={`/blog/${post._id}`}
               className="bg-base-200 rounded-2xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
               <div className="relative h-48 overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <Image src={post.image} alt={post.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 <span className="absolute top-3 left-3 bg-sky-500 text-white text-xs font-bold px-3 py-1 rounded-full">{post.category}</span>
               </div>
               <div className="p-5">

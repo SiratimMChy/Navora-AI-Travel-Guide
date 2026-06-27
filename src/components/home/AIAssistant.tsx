@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { FaRobot, FaTimes, FaComments, FaStar, FaMapMarkerAlt, FaPaperPlane } from "react-icons/fa";
 import { Destination } from "@/types";
 import Link from "next/link";
-
+import Image from "next/image";
 type Message = {
   role: "bot" | "user";
   text?: string;
@@ -142,8 +142,7 @@ export default function AIAssistant() {
                     {msg.recommendations.map((dest) => (
                       <Link key={dest._id} href={`/destinations/${dest._id}`} onClick={() => setOpen(false)}
                         className="flex items-center gap-3 p-2.5 rounded-xl bg-base-200 hover:bg-base-300 transition-colors border border-base-300 group">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={dest.image} alt={dest.title} className="w-14 h-12 rounded-lg object-cover shrink-0" />
+                        <Image src={dest.image} alt={dest.title} width={56} height={48} className="w-14 h-12 rounded-lg object-cover shrink-0" />
                         <div className="min-w-0">
                           <p className="font-semibold text-base-content text-sm truncate group-hover:text-sky-500 transition-colors">{dest.title}</p>
                           <p className="text-base-content/50 text-xs flex items-center gap-1">

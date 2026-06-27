@@ -18,6 +18,9 @@ export default function DestinationDetailPage() {
   const [travelers, setTravelers] = useState(1);
   const [travelDate, setTravelDate] = useState("");
   const [booking, setBooking] = useState(false);
+  const [weather, setWeather] = useState<any>(null);
+  const [weatherLoading, setWeatherLoading] = useState(false);
+  const [weatherError, setWeatherError] = useState("");
 
   useEffect(() => {
     fetch(`/api/destinations/${id}`)
@@ -28,6 +31,31 @@ export default function DestinationDetailPage() {
         setLoading(false);
       });
   }, [id]);
+
+  useEffect(() => {
+    if (destination?.location) {
+      const fetchWeather = async () => {
+        setWeatherLoading(true);
+        try {
+          const apiKey = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
+          if (!apiKey) {
+            setWeatherError("API Key missing");
+            setWeatherLoading(false);
+            return;
+          }
+          const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${destination.location}&appid=${apiKey}&units=metric`);
+          if (!res.ok) throw new Error("Failed to fetch weather");
+          const data = await res.json();
+          setWeather(data);
+        } catch (err) {
+          setWeatherError("Unavailable");
+        } finally {
+          setWeatherLoading(false);
+        }
+      };
+      fetchWeather();
+    }
+  }, [destination?.location]);
 
   const handleBook = async () => {
     if (!session) { Swal.fire("Login Required", "Please login to book a trip.", "info"); return; }
@@ -76,7 +104,7 @@ export default function DestinationDetailPage() {
           {/* Left: Image */}
           <div className="space-y-3">
             <div className="relative h-72 sm:h-96 rounded-2xl overflow-hidden bg-base-200">
-              <Image src={activeImage} alt={destination.title} fill className="object-cover transition-all duration-500" priority />
+              <Image src={activeImage} alt={destination.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-all duration-500" priority />
             </div>
             {/* Thumbnail strip */}
             {allImages.length > 1 && (
@@ -84,7 +112,7 @@ export default function DestinationDetailPage() {
                 {allImages.map((img, i) => (
                   <button key={i} onClick={() => setActiveImage(img)}
                     className={`relative shrink-0 w-16 h-12 sm:w-20 sm:h-14 rounded-lg overflow-hidden border-2 transition-all duration-200 ${activeImage === img ? "border-sky-400 scale-105 shadow-lg" : "border-base-300 hover:border-sky-300"}`}>
-                    <Image src={img} alt={`view-${i}`} fill className="object-cover" />
+                    <Image src={img} alt={`view-${i}`} fill sizes="80px" className="object-cover" />
                   </button>
                 ))}
               </div>
@@ -166,28 +194,65 @@ export default function DestinationDetailPage() {
           )}
         </div>
 
-        {/* Right: Booking Card — only for non-admin users */}
+        {/* Right: Booking Card & Weather — only for non-admin users */}
         {!isAdmin && (
-        <div className="lg:col-span-1">
-          <div className="bg-base-200 border border-base-300 rounded-2xl shadow-xl p-6 sticky top-24">
+        <div className="lg:col-span-1 space-y-6 sticky top-24 self-start">
+          
+          {/* Weather Widget */}
+          <div className="bg-gradient-to-br from-sky-500 to-blue-600 rounded-2xl shadow-xl p-6 text-white relative overflow-hidden">
+            <div className="absolute -top-10 -right-10 text-white/10">
+              <FaGlobe size={150} />
+            </div>
+            <h3 className="text-lg font-bold mb-4 relative z-10 flex items-center gap-2">
+              Current Weather
+            </h3>
+            {weatherLoading ? (
+              <div className="flex justify-center py-6 relative z-10"><span className="loading loading-spinner loading-md text-white" /></div>
+            ) : weatherError ? (
+              <div className="text-sm bg-white/20 p-4 rounded-xl text-center relative z-10 font-medium border border-white/20">
+                {weatherError === "API Key missing" ? "Please add NEXT_PUBLIC_OPENWEATHER_API_KEY in .env" : "Weather data currently unavailable"}
+              </div>
+            ) : weather ? (
+              <div className="relative z-10">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-5xl font-bold tracking-tighter">{Math.round(weather.main.temp)}°<span className="text-3xl text-white/80">C</span></p>
+                    <p className="text-white/90 capitalize font-medium text-sm mt-1">{weather.weather[0].description}</p>
+                  </div>
+                  <div className="bg-white/20 rounded-full p-2 backdrop-blur-md">
+                    <Image src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} alt="weather" width={70} height={70} className="drop-shadow-lg" />
+                  </div>
+                </div>
+                <div className="flex gap-6 mt-4 pt-4 border-t border-white/20 text-sm text-white/90">
+                  <div className="flex flex-col"><span className="text-white/70 text-xs mb-1">Humidity</span><span className="font-semibold text-base">{weather.main.humidity}%</span></div>
+                  <div className="flex flex-col"><span className="text-white/70 text-xs mb-1">Wind</span><span className="font-semibold text-base">{weather.wind.speed} m/s</span></div>
+                </div>
+              </div>
+            ) : null}
+          </div>
+
+          {/* Booking Card */}
+          <div className="bg-base-200 border border-base-300 rounded-2xl shadow-xl p-6">
             <div className="text-center mb-6">
               <p className="text-base-content/50 text-sm mb-1">Price per person</p>
               <span className="text-4xl font-bold text-sky-600">${destination.price}</span>
             </div>
 
             <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-semibold text-base-content mb-1">Travel Date</label>
-                <input type="date" value={travelDate} onChange={(e) => setTravelDate(e.target.value)}
-                  min={new Date().toISOString().split("T")[0]}
-                  className="w-full px-4 py-3 border border-base-300 rounded-xl outline-none focus:ring-2 focus:ring-sky-500 bg-base-100 text-base-content" />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-base-content mb-1">Travelers</label>
-                <input type="number" value={travelers}
-                  onChange={(e) => setTravelers(Math.max(1, parseInt(e.target.value) || 1))}
-                  min={1} max={20}
-                  className="w-full px-4 py-3 border border-base-300 rounded-xl outline-none focus:ring-2 focus:ring-sky-500 bg-base-100 text-base-content" />
+              <div className="grid grid-cols-5 gap-3">
+                <div className="col-span-3">
+                  <label className="block text-sm font-semibold text-base-content mb-1">Travel Date</label>
+                  <input type="date" value={travelDate} onChange={(e) => setTravelDate(e.target.value)}
+                    min={new Date().toISOString().split("T")[0]}
+                    className="w-full px-2 sm:px-3 py-3 border border-base-300 rounded-xl outline-none focus:ring-2 focus:ring-sky-500 bg-base-100 text-base-content text-sm sm:text-base" />
+                </div>
+                <div className="col-span-2">
+                  <label className="block text-sm font-semibold text-base-content mb-1">Travelers</label>
+                  <input type="number" value={travelers}
+                    onChange={(e) => setTravelers(Math.max(1, parseInt(e.target.value) || 1))}
+                    min={1} max={20}
+                    className="w-full px-3 py-3 border border-base-300 rounded-xl outline-none focus:ring-2 focus:ring-sky-500 bg-base-100 text-base-content" />
+                </div>
               </div>
 
               <div className="bg-base-100 border border-base-300 rounded-xl p-4 text-sm">

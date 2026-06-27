@@ -2,6 +2,7 @@
 
 import { FaStar, FaQuoteLeft } from "react-icons/fa";
 import { Review } from "@/types";
+import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -66,10 +67,11 @@ export default function Testimonials({ reviews }: { reviews: Review[] }) {
                 {/* Author */}
                 <div className="flex items-center gap-3">
                   {review.userImage ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
+                    <Image
                       src={review.userImage}
                       alt={review.userName}
+                      width={44}
+                      height={44}
                       className="w-11 h-11 rounded-full object-cover ring-2 ring-sky-500/20"
                     />
                   ) : (

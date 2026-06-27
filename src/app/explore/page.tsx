@@ -106,7 +106,7 @@ function ExploreContent() {
               <div key={dest._id} className="bg-base-100 border border-base-300 rounded-2xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
                 {/* Image */}
                 <div className="relative overflow-hidden h-56">
-                  <Image src={dest.image} alt={dest.title} fill className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <Image src={dest.image} alt={dest.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
                   <span className={`absolute top-3 left-3 ${getCategoryGradient(dest.category)} text-white text-xs font-bold px-3 py-1.5 rounded-full capitalize shadow-lg`}>
                     {dest.category}
                   </span>

@@ -2,8 +2,9 @@ import { FaCalendar, FaUser, FaTag } from "react-icons/fa";
 import { connectDB } from "@/lib/mongoose";
 import BlogPostModel from "@/models/BlogPost";
 import { BlogPost } from "@/types";
-import Link from "next/link";
 import AddBlogPostButton from "./AddBlogPostButton";
+import Image from "next/image";
+import Link from "next/link";
 
 async function getPosts(): Promise<BlogPost[]> {
   try {
@@ -43,8 +44,7 @@ export default async function BlogPage() {
               <Link href={`/blog/${featured._id}`} className="bg-base-200 border border-base-300 rounded-2xl overflow-hidden shadow-lg mb-10 group hover:shadow-2xl transition-all duration-300 block">
                 <div className="grid grid-cols-1 md:grid-cols-2">
                   <div className="relative h-64 md:h-auto overflow-hidden">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={featured.image} alt={featured.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <Image src={featured.image} alt={featured.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
                     <span className="absolute top-4 left-4 bg-sky-500 text-white text-sm font-bold px-3 py-1 rounded-full">Featured</span>
                   </div>
                   <div className="p-6 sm:p-8 flex flex-col justify-center">
@@ -71,8 +71,7 @@ export default async function BlogPage() {
                 {rest.map((post) => (
                   <Link key={String(post._id)} href={`/blog/${post._id}`} className="bg-base-200 border border-base-300 rounded-2xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group block">
                     <div className="relative h-48 overflow-hidden">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                      <Image src={post.image} alt={post.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
                       <span className="absolute top-3 left-3 bg-sky-500 text-white text-xs font-bold px-3 py-1 rounded-full">{post.category}</span>
                     </div>
                     <div className="p-5">
