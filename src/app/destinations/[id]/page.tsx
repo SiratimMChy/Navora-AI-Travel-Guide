@@ -94,7 +94,7 @@ export default function DestinationDetailPage() {
           {/* Right: Description */}
           <div className="space-y-4">
             <div className="flex items-center justify-between flex-wrap gap-2">
-              <span className="badge badge-primary text-white capitalize">{destination.category}</span>
+              <span className="badge bg-gradient-to-r from-blue-600 to-cyan-600 border-0 text-white capitalize px-3">{destination.category}</span>
               {isAdmin && (
                 <Link href={`/destinations/${id}/edit`}
                   className="flex items-center gap-1.5 btn btn-sm bg-linear-to-r from-sky-500 to-teal-500 text-white border-0 hover:opacity-90">
