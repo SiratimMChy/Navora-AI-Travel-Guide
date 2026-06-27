@@ -11,6 +11,7 @@
 [![Stripe](https://img.shields.io/badge/Stripe-20.4.1-635BFF?style=flat&logo=stripe&logoColor=white)](https://stripe.com/)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind-4.2.1-06B6D4?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Groq AI](https://img.shields.io/badge/Groq%20AI-LLaMA%203.3-FF6B35?style=flat&logo=ai&logoColor=white)](https://groq.com/)
+[![OpenWeatherMap](https://img.shields.io/badge/OpenWeatherMap-API-EB6E4B?style=flat&logo=openweathermap&logoColor=white)](https://openweathermap.org/)
 
 <div align="center">
 
@@ -126,8 +127,13 @@ Unlike traditional travel booking platforms, Navora stands out by:
 - **Dark Mode Support**: Built-in theme switching with DaisyUI
 - **Touch-Friendly UI**: Swiper carousels and gesture-optimized controls
 - **WCAG 2.1 Compliance**: Semantic HTML and accessibility best practices
-- **Performance Optimized**: Lazy loading, image optimization, and code splitting
+- **Performance Optimized**: Next.js native `<Image>` optimization, lazy loading, and code splitting
 - **Cross-Browser Support**: Works seamlessly on all modern browsers
+
+### 🌍 Dynamic Destination Pages
+- **Real-Time Weather Widget**: Live current weather and temperature data powered by OpenWeatherMap API
+- **Interactive Image Galleries**: High-performance photo viewers with thumbnail navigation
+- **Streamlined Booking UI**: Modern side-by-side date and traveler selection interface
 
 ---
 
@@ -156,6 +162,7 @@ flowchart TB
         Stripe["Stripe (Payment Gateway)"]
         Groq["Groq AI (LLaMA 3.3)"]
         OAuth["Google OAuth (Authentication)"]
+        Weather["OpenWeatherMap"]
     end
 
     UI <-->|HTTP Requests| API
@@ -165,6 +172,7 @@ flowchart TB
     ODM <-->|Read / Write| Mongo
     API <-->|Payment Intents| Stripe
     API <-->|AI Prompts| Groq
+    UI <-->|Weather Data| Weather
 ```
 
 ### Data Flow
@@ -213,6 +221,7 @@ flowchart TB
 | **Stripe** | Payment processing | 135+ currencies, PCI DSS Level 1 |
 | **Groq AI** | AI recommendations | LLaMA 3.3 70B model for inference |
 | **Google OAuth** | Social authentication | One-click sign-in |
+| **OpenWeatherMap** | Live Weather Data | Real-time weather widget |
 | **MongoDB Atlas** | Cloud database | Managed MongoDB hosting |
 | **Vercel** | Deployment platform | Serverless hosting and CI/CD |
 
@@ -272,6 +281,7 @@ NEXT_PUBLIC_IMGBB_API_KEY=your_imgbb_api_key
 STRIPE_SECRET_KEY=sk_test_...
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
 GROQ_API_KEY=your_groq_api_key
+NEXT_PUBLIC_OPENWEATHER_API_KEY=your_openweathermap_api_key
 ```
 
 4. **Start the development server**
@@ -299,6 +309,7 @@ Navigate to `http://localhost:3000` to see the application running.
 | `STRIPE_SECRET_KEY` | Stripe secret key | Yes |
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Stripe publishable key | Yes |
 | `GROQ_API_KEY` | Groq AI API key | Yes |
+| `NEXT_PUBLIC_OPENWEATHER_API_KEY` | OpenWeatherMap API key | Yes |
 
 ---
 
