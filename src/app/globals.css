@@ -23,3 +23,37 @@
 }
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+/* Responsive Swiper Navigation Arrow Sizes */
+.swiper {
+  /* Default for very small screens (320px and below) */
+  --swiper-navigation-size: 22px !important;
+}
+
+/* Medium Mobile */
+@media (min-width: 375px) {
+  .swiper {
+    --swiper-navigation-size: 24px !important;
+  }
+}
+
+/* Large Mobile */
+@media (min-width: 425px) {
+  .swiper {
+    --swiper-navigation-size: 28px !important;
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .swiper {
+    --swiper-navigation-size: 32px !important;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .swiper {
+    --swiper-navigation-size: 44px !important; /* Swiper default */
+  }
+}

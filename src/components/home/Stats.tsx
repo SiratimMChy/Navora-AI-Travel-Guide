@@ -16,8 +16,8 @@ export default function Stats({ destCount, bookingCount, userCount, avgRating }:
   ];
 
   return (
-    <section className="py-16 px-4 bg-base-200">
-      <div className="max-w-5xl mx-auto">
+    <section className="py-16 px-4 lg:px-0 bg-base-200">
+      <div className="w-full lg:w-11/12 mx-auto">
         <div className="text-center mb-10">
           <span className="inline-block bg-sky-500/10 text-sky-600 text-xs font-semibold px-4 py-1.5 rounded-full uppercase tracking-widest">
             Navora by the Numbers

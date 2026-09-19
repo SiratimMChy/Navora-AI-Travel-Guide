@@ -22,7 +22,7 @@ async function getHomeData() {
     const [popular, featured, reviews, posts, destCount, bookingCount, userCount, ratingAgg] = await Promise.all([
       DestinationModel.find({ popular: true }).sort({ rating: -1 }).limit(8).lean(),
       DestinationModel.find({ featured: true }).sort({ rating: -1 }).limit(4).lean(),
-      ReviewModel.find({}).sort({ createdAt: -1 }).limit(3).lean(),
+      ReviewModel.find({}).sort({ createdAt: -1 }).limit(5).lean(),
       BlogPostModel.find({}).sort({ createdAt: -1 }).limit(3).lean(),
       DestinationModel.countDocuments(),
       BookingModel.countDocuments(),
@@ -30,7 +30,7 @@ async function getHomeData() {
       ReviewModel.aggregate([{ $group: { _id: null, avg: { $avg: "$rating" } } }]),
     ]);
     const avgRating = ratingAgg[0]?.avg ? ratingAgg[0].avg.toFixed(1) : "4.9";
-    
+
     // Serialize data to plain objects
     const serializedReviews = reviews.map((review) => ({
       ...review,
@@ -39,37 +39,37 @@ async function getHomeData() {
       createdAt: review.createdAt?.toISOString(),
       updatedAt: review.updatedAt?.toISOString(),
     }));
-    
+
     const serializedPosts = posts.map((post) => ({
       ...post,
       _id: post._id.toString(),
       createdAt: post.createdAt?.toISOString(),
       updatedAt: post.updatedAt?.toISOString(),
     }));
-    
+
     const serializedPopular = popular.map((dest) => ({
       ...dest,
       _id: dest._id.toString(),
       createdAt: dest.createdAt?.toISOString(),
       updatedAt: dest.updatedAt?.toISOString(),
     }));
-    
+
     const serializedFeatured = featured.map((dest) => ({
       ...dest,
       _id: dest._id.toString(),
       createdAt: dest.createdAt?.toISOString(),
       updatedAt: dest.updatedAt?.toISOString(),
     }));
-    
-    return { 
-      popular: serializedPopular, 
-      featured: serializedFeatured, 
-      reviews: serializedReviews, 
-      posts: serializedPosts, 
-      destCount, 
-      bookingCount, 
-      userCount, 
-      avgRating 
+
+    return {
+      popular: serializedPopular,
+      featured: serializedFeatured,
+      reviews: serializedReviews,
+      posts: serializedPosts,
+      destCount,
+      bookingCount,
+      userCount,
+      avgRating
     };
   } catch {
     return { popular: [], featured: [], reviews: [], posts: [], destCount: 0, bookingCount: 0, userCount: 0, avgRating: "4.9" };

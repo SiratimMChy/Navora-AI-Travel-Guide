@@ -6,8 +6,8 @@ export default function Blog({ posts }: { posts: BlogPost[] }) {
   if (!posts.length) return null;
 
   return (
-    <section className="py-16 px-4 bg-base-100">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-16 px-4 lg:px-0 bg-base-100">
+      <div className="w-full lg:w-11/12 mx-auto">
         <div className="text-center mb-8 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-base-content mb-3">Travel Tips & Blog</h2>
           <p className="text-base-content/60 text-base sm:text-lg">Insights and inspiration for your next adventure</p>

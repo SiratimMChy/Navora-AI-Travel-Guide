@@ -13,8 +13,8 @@ export default function Testimonials({ reviews }: { reviews: Review[] }) {
   if (!reviews.length) return null;
 
   return (
-    <section className="py-20 px-4 bg-base-200">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-20 px-4 lg:px-0 bg-base-200">
+      <div className="w-full lg:w-11/12 mx-auto">
 
         {/* Header */}
         <div className="text-center mb-12">
@@ -43,8 +43,8 @@ export default function Testimonials({ reviews }: { reviews: Review[] }) {
           className="pb-14"
         >
           {reviews.map((review) => (
-            <SwiperSlide key={String(review._id)} style={{ width: "340px" }}>
-              <div className="bg-base-100 rounded-3xl p-7 shadow-md flex flex-col gap-5 h-full border border-base-content/5">
+            <SwiperSlide key={String(review._id)} style={{ width: "360px" }}>
+              <div className="bg-base-100 rounded-2xl p-7 shadow-md flex flex-col gap-5 h-full border border-base-300">
 
                 {/* Top: quote + stars */}
                 <div className="flex items-start justify-between">

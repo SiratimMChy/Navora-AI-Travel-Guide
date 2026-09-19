@@ -9,8 +9,8 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="py-20 px-4 bg-base-200">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-20 px-4 lg:px-0 bg-base-200">
+      <div className="w-full lg:w-11/12 mx-auto">
         <div className="text-center mb-14">
           <span className="inline-block bg-sky-500/10 text-sky-600 text-xs font-semibold px-4 py-1.5 rounded-full uppercase tracking-widest mb-4">Simple Process</span>
           <h2 className="text-3xl sm:text-4xl font-bold text-base-content mb-3">How It Works</h2>

@@ -11,8 +11,8 @@ const categories = [
 
 export default function Categories() {
   return (
-    <section className="py-12 sm:py-16 px-4 bg-base-100">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-6 lg:py-8 sm:py-16 px-4 lg:px-0 bg-base-100">
+      <div className="w-full lg:w-11/12 mx-auto">
         <div className="text-center mb-8 sm:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-base-content mb-2 sm:mb-3">Browse by Category</h2>
           <p className="text-base-content/60 text-sm sm:text-base md:text-lg">Find your perfect travel style</p>

@@ -54,17 +54,17 @@ const slides = [
 
 export default function Hero() {
   return (
-    <div className="w-full px-2 lg:px-6 pt-4 pb-4">
+    <div className="w-full px-2 lg:px-0 lg:w-11/12 mx-auto pt-0.5 pb-4">
       <Swiper
         navigation
         pagination={{ clickable: true }}
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         modules={[Navigation, Pagination, Autoplay]}
-        className="rounded-2xl overflow-hidden shadow-2xl"
+        className="rounded-lg overflow-hidden shadow-2xl"
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
-            <div className="relative h-56 sm:h-72 md:h-96 lg:h-[480px]">
+            <div className="relative h-64 xs:h-72 sm:h-80 md:h-96 lg:h-[480px]">
               <Image
                 src={slide.img}
                 alt={`${slide.title} - Navora`}
@@ -77,11 +77,11 @@ export default function Hero() {
               <div className="absolute inset-0 bg-linear-to-b from-black/30 via-transparent to-black/70" />
 
               {/* Center content */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 gap-2">
-                <p className="text-white/80 text-xs sm:text-sm uppercase tracking-widest font-medium">
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 gap-2 pb-3 sm:pb-0">
+                <p className="text-white/80 text-xs sm:text-sm uppercase tracking-widest font-medium ">
                   {slide.country}
                 </p>
-                <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold drop-shadow-xl">
+                <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold drop-shadow-xl pb-2">
                   {slide.title}
                 </h1>
                 <p className="text-white/90 text-sm sm:text-base md:text-lg max-w-xl drop-shadow bg-black/25 backdrop-blur-sm px-4 py-2 rounded-2xl border border-white/20">
@@ -95,16 +95,16 @@ export default function Hero() {
                     cursorStyle="|"
                   />
                 </p>
-                <div className="flex gap-3 mt-3">
+                <div className="flex flex-nowrap justify-center gap-2 sm:gap-3 mt-4 w-full px-1 sm:px-0">
                   <Link
                     href="/explore"
-                    className="btn px-6 py-2 rounded-full text-sm font-semibold shadow-lg hover:scale-105 transition-transform bg-gradient-to-r from-blue-600 to-cyan-500 text-white border-none hover:from-blue-700 hover:to-cyan-600"
+                    className="btn min-h-0 h-auto px-3 py-1.5 sm:px-6 sm:py-2.5 rounded-full text-[11px] sm:text-sm font-semibold shadow-lg hover:scale-105 transition-transform bg-gradient-to-r from-blue-600 to-cyan-500 text-white border-none hover:from-blue-700 hover:to-cyan-600 whitespace-nowrap"
                   >
                     Explore Destinations
                   </Link>
                   <button
                     onClick={() => document.getElementById("featured")?.scrollIntoView({ behavior: "smooth" })}
-                    className="btn btn-outline px-6 py-2 rounded-full text-sm font-semibold text-white border-white hover:bg-white hover:text-black transition-all"
+                    className="btn min-h-0 h-auto btn-outline px-3 py-1.5 sm:px-6 sm:py-2.5 rounded-full text-[11px] sm:text-sm font-semibold text-white border-white hover:bg-white hover:text-black transition-all whitespace-nowrap"
                   >
                     View Tours
                   </button>

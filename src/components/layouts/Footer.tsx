@@ -9,10 +9,10 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="footer sm:footer-horizontal p-10" style={{ backgroundColor: "#111827", color: "#fff" }}>
-
-        {/* Brand */}
-        <aside>
+      <div className="py-10 px-4 lg:px-0" style={{ backgroundColor: "#111827", color: "#fff" }}>
+        <footer className="footer sm:footer-horizontal w-full lg:w-11/12 mx-auto">
+          {/* Brand */}
+          <aside>
           <Link href="/" className="text-3xl font-lobster font-bold bg-linear-to-r from-sky-400 to-teal-400 bg-clip-text text-transparent">
             Navora
           </Link>
@@ -61,7 +61,8 @@ export default function Footer() {
           <Link href="/refund" className="link link-hover text-white/60 hover:text-white">Refund Policy</Link>
         </nav>
 
-      </footer>
+        </footer>
+      </div>
 
       {/* Bottom bar */}
       <div className="text-center text-white/30 text-sm py-4 border-t border-white/10" style={{ backgroundColor: "#111827" }}>

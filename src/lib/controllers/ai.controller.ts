@@ -10,7 +10,7 @@ const getGroqClient = () => {
 const chat = async (prompt: string): Promise<string> => {
   const groq = getGroqClient();
   const completion = await groq.chat.completions.create({
-    model: "llama-3.3-70b-versatile",
+    model: "qwen/qwen3.6-27b",
     messages: [{ role: "user", content: prompt }],
     max_tokens: 300,
     temperature: 0.7,
