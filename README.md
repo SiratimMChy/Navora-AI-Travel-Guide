@@ -10,7 +10,7 @@
 [![MongoDB](https://img.shields.io/badge/MongoDB-7.1.0-13AA52?style=flat&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 [![Stripe](https://img.shields.io/badge/Stripe-20.4.1-635BFF?style=flat&logo=stripe&logoColor=white)](https://stripe.com/)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind-4.2.1-06B6D4?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Groq AI](https://img.shields.io/badge/Groq%20AI-LLaMA%203.3-FF6B35?style=flat&logo=ai&logoColor=white)](https://groq.com/)
+[![Groq AI](https://img.shields.io/badge/Groq%20AI-Qwen%203.6-FF6B35?style=flat&logo=ai&logoColor=white)](https://groq.com/)
 [![OpenWeatherMap](https://img.shields.io/badge/OpenWeatherMap-API-EB6E4B?style=flat&logo=openweathermap&logoColor=white)](https://openweathermap.org/)
 
 <div align="center">
@@ -55,7 +55,7 @@
 
 ### Core Value Proposition
 
-- **AI-Powered Discovery**: Groq's LLaMA 3.3 70B model provides intelligent, context-aware destination recommendations
+- **AI-Powered Discovery**: Groq's Qwen 3.6 27B model provides intelligent, context-aware destination recommendations
 - **Secure Payments**: Stripe integration ensures PCI-compliant payment processing with 135+ currency support
 - **Real-time Management**: Live booking queue, instant confirmations, and comprehensive admin analytics
 - **Enterprise-Grade Security**: NextAuth.js with role-based access control and encrypted data storage
@@ -77,7 +77,7 @@ Unlike traditional travel booking platforms, Navora stands out by:
 
 ### 🤖 AI-Powered Recommendations Engine
 
-- **Intelligent Chatbot**: Real-time conversational AI powered by Groq's LLaMA 3.3 70B model
+- **Intelligent Chatbot**: Real-time conversational AI powered by Groq's Qwen 3.6 27B model
 - **Context-Aware Analysis**: Considers destination category, budget constraints, and group size
 - **Smart Filtering**: Budget-aware destination matching with quality-based ranking
 - **Natural Language Processing**: Understands user preferences and generates personalized suggestions
@@ -160,7 +160,7 @@ flowchart TB
 
     subgraph Ext ["External Services"]
         Stripe["Stripe (Payment Gateway)"]
-        Groq["Groq AI (LLaMA 3.3)"]
+        Groq["Groq AI (Qwen 3.6)"]
         OAuth["Google OAuth (Authentication)"]
         Weather["OpenWeatherMap"]
     end
@@ -219,7 +219,7 @@ flowchart TB
 | Service | Purpose | Integration |
 |---------|---------|-------------|
 | **Stripe** | Payment processing | 135+ currencies, PCI DSS Level 1 |
-| **Groq AI** | AI recommendations | LLaMA 3.3 70B model for inference |
+| **Groq AI** | AI recommendations | Qwen 3.6 27B model for inference |
 | **Google OAuth** | Social authentication | One-click sign-in |
 | **OpenWeatherMap** | Live Weather Data | Real-time weather widget |
 | **MongoDB Atlas** | Cloud database | Managed MongoDB hosting |
