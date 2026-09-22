@@ -135,6 +135,12 @@ Unlike traditional travel booking platforms, Navora stands out by:
 - **Interactive Image Galleries**: High-performance photo viewers with thumbnail navigation
 - **Streamlined Booking UI**: Modern side-by-side date and traveler selection interface
 
+### 📋 Platform Information & Legal
+- **Interactive FAQ**: Comprehensive Frequently Asked Questions section to help users
+- **User Guidance**: Step-by-step "How It Works" visual guide for navigating the platform
+- **Legal Policies**: Dedicated pages for Privacy Policy, Terms of Service, and Refund Policy
+
+
 ---
 
 ## 🏗️ Architecture
@@ -357,6 +363,9 @@ Navigate to `http://localhost:3000` to see the application running.
 - **`/blog`** - Travel guides and tips
 - **`/about`** - About Navora
 - **`/contact`** - Contact information
+- **`/privacy`** - Privacy Policy page
+- **`/terms`** - Terms of Service page
+- **`/refund`** - Refund Policy page
 
 ---
 
@@ -597,83 +606,31 @@ Navora is optimized for deployment on Vercel, which provides serverless hosting,
 
 ### Alternative Deployment Options
 
-#### Docker Deployment
+#### Netlify Deployment
 
-```dockerfile
-FROM node:20-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
-RUN npm run build
-EXPOSE 3000
-CMD ["npm", "start"]
-```
+Netlify offers seamless integration with Next.js applications and provides serverless functions for API routes.
 
-Build and run:
-```bash
-docker build -t navora .
-docker run -p 3000:3000 --env-file .env.local navora
-```
+1. **Push your code to GitHub**
+2. **Connect to Netlify**
+   - Log in to [Netlify](https://www.netlify.com/)
+   - Click "Add new site" -> "Import an existing project"
+   - Select GitHub and authorize access
+   - Choose your repository
+3. **Configure Settings**
+   - Build command: `npm run build`
+   - Publish directory: `.next`
+   - Add all environment variables in "Advanced build settings" -> "New variable"
+4. **Deploy**
+   - Click "Deploy site"
 
-#### Self-Hosted (VPS/Dedicated Server)
+#### GitHub Deployments (via GitHub Actions)
 
-1. **Install Node.js and npm**
-   ```bash
-   curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-   sudo apt-get install -y nodejs
-   ```
+You can use GitHub Actions to automate your deployment pipeline to any cloud provider or server.
 
-2. **Clone and setup**
-   ```bash
-   git clone https://github.com/SiratimMChy/navora.git
-   cd navora
-   npm install
-   ```
-
-3. **Build for production**
-   ```bash
-   npm run build
-   ```
-
-4. **Use PM2 for process management**
-   ```bash
-   npm install -g pm2
-   pm2 start npm --name "navora" -- start
-   pm2 save
-   pm2 startup
-   ```
-
-5. **Configure Nginx reverse proxy**
-   ```nginx
-   server {
-       listen 80;
-       server_name yourdomain.com;
-       
-       location / {
-           proxy_pass http://localhost:3000;
-           proxy_http_version 1.1;
-           proxy_set_header Upgrade $http_upgrade;
-           proxy_set_header Connection 'upgrade';
-           proxy_set_header Host $host;
-           proxy_cache_bypass $http_upgrade;
-       }
-   }
-   ```
-
-#### AWS Deployment
-
-- **EC2**: Deploy on virtual servers with full control
-- **Lambda**: Serverless deployment with API Gateway
-- **Amplify**: Managed hosting with Git integration
-- **RDS**: Managed MongoDB alternative with DocumentDB
-
-#### Other Platforms
-
-- **Railway**: Simple Git-based deployment
-- **Render**: Free tier with automatic deployments
-- **Heroku**: Classic PaaS (paid tier)
-- **DigitalOcean**: App Platform for managed deployment
+1. Go to your repository's **Actions** tab.
+2. Search for Next.js deployment workflows or use a custom `.github/workflows/deploy.yml` file.
+3. Configure your secrets in **Settings -> Secrets and variables -> Actions**.
+4. Push to the `main` branch to trigger the automated deployment workflow.
 
 ### Environment Variables for Production
 
@@ -818,6 +775,7 @@ Contributions make the open-source community an amazing place to learn, inspire,
 
 ### Contribution Guidelines
 
+- **Credit**: When making contributions, you must give proper credit to the main author, **Siratim Mustakim Chowdhury**.
 - **Code Style**: Follow existing code conventions and formatting
 - **Commit Messages**: Write clear, descriptive commit messages
 - **Documentation**: Update README and comments for new features
@@ -892,7 +850,7 @@ The above copyright notice and this permission notice shall be included in all c
 - **API Endpoints**: 20+
 - **MongoDB Collections**: 5
 - **Supported Devices**: Desktop, Tablet, Mobile
-- **Deployment Platforms**: Vercel, Docker, Self-hosted
+- **Deployment Platforms**: Vercel, Netlify, GitHub Actions
 - **Authentication Methods**: Email/Password, Google OAuth
 - **Payment Currencies**: 135+
 
