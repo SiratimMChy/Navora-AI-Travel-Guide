@@ -278,7 +278,7 @@ yarn install
 Create a `.env.local` file in the root directory:
 
 ```env
-MONGODB_URI=mongodb+srv://user:password@cluster.mongodb.net/navora
+MONGODB_URI=<your_mongodb_connection_string>
 NEXTAUTH_SECRET=your_nextauth_secret_key
 NEXTAUTH_URL=http://localhost:3000
 GOOGLE_CLIENT_ID=your_google_client_id
@@ -636,7 +636,7 @@ You can use GitHub Actions to automate your deployment pipeline to any cloud pro
 
 ```env
 # Database
-MONGODB_URI=mongodb+srv://user:password@cluster.mongodb.net/navora
+MONGODB_URI=<your_mongodb_connection_string>
 
 # Authentication
 NEXTAUTH_SECRET=your_very_secure_random_string_here
