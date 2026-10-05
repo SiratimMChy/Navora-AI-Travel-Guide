@@ -7,6 +7,8 @@ import { FcGoogle } from "react-icons/fc";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { AiOutlineLoading } from "react-icons/ai";
 
+import { toast } from "react-toastify";
+
 const LoginForm = () => {
   const params = useSearchParams();
   const router = useRouter();
@@ -33,12 +35,16 @@ const LoginForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validate()) return;
+    if (!validate()) {
+      return;
+    }
     setLoading(true);
     const result = await signIn("credentials", { email: form.email, password: form.password, redirect: false, callbackUrl: callback });
-    if (!result?.ok) {
+    if (result?.error) {
+      toast.error("Incorrect email or password.");
       setErrors({ ...errors, password: "Incorrect email or password." });
     } else {
+      toast.success("Successfully logged in!");
       router.push(callback);
     }
     setLoading(false);

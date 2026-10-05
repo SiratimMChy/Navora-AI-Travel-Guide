@@ -8,6 +8,8 @@ import { FcGoogle } from "react-icons/fc";
 import { FaEye, FaEyeSlash, FaCheck, FaTimes } from "react-icons/fa";
 import { AiOutlineLoading } from "react-icons/ai";
 
+import { toast } from "react-toastify";
+
 export const RegisterForm = () => {
   const params = useSearchParams();
   const router = useRouter();
@@ -42,18 +44,28 @@ export const RegisterForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validate()) return;
+    if (!validate()) {
+      return;
+    }
     setLoading(true);
     const result = await postUser(form);
     if (result.acknowledged) {
+      toast.success("Account created successfully!");
       const signInResult = await signIn("credentials", { email: form.email, password: form.password, redirect: false, callbackUrl });
-      if (signInResult?.ok) router.push(callbackUrl);
-      else setErrors({ ...errors, email: "Account created but login failed. Try logging in." });
+      if (signInResult?.error) {
+        toast.error("Account created but login failed.");
+        setErrors({ ...errors, email: "Account created but login failed. Try logging in." });
+      } else {
+        toast.success("Successfully logged in!");
+        router.push(callbackUrl);
+      }
     } else {
       const msg: string = result.error || "";
       if (msg.toLowerCase().includes("already") || msg.toLowerCase().includes("exists")) {
+        toast.error("This email is already registered.");
         setAlreadyRegistered(true);
       } else {
+        toast.error(msg || "Registration failed. Please try again.");
         setErrors({ ...errors, email: msg || "Registration failed. Please try again." });
       }
     }

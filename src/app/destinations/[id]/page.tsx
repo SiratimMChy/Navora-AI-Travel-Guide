@@ -1,12 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { FaStar, FaMapMarkerAlt, FaClock, FaUsers, FaTag, FaGlobe, FaEdit } from "react-icons/fa";
+import { FaStar, FaMapMarkerAlt, FaClock, FaUsers, FaTag, FaGlobe, FaEdit, FaPlane } from "react-icons/fa";
 import { Destination } from "@/types";
 import { useSession } from "next-auth/react";
 import Swal from "sweetalert2";
 import Image from "next/image";
 import Link from "next/link";
+import { countriesList } from "@/lib/countries";
 
 export default function DestinationDetailPage() {
   const { id } = useParams();
@@ -21,6 +22,32 @@ export default function DestinationDetailPage() {
   const [weather, setWeather] = useState<any>(null);
   const [weatherLoading, setWeatherLoading] = useState(false);
   const [weatherError, setWeatherError] = useState("");
+  const [includeFlight, setIncludeFlight] = useState(false);
+  const [origin, setOrigin] = useState("Bangladesh"); // Default origin
+  const [flights, setFlights] = useState<any[]>([]);
+  const [loadingFlights, setLoadingFlights] = useState(false);
+  const [selectedFlight, setSelectedFlight] = useState<any>(null);
+
+  // Utilizing countriesList from lib
+
+  useEffect(() => {
+    if (includeFlight && travelDate && destination?.location) {
+      setLoadingFlights(true);
+      fetch(`/api/flights/search?origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination.location)}`)
+        .then((r) => r.json())
+        .then((d) => {
+          setFlights(d.data || []);
+          if (d.data?.length > 0) setSelectedFlight(d.data[0]);
+          setLoadingFlights(false);
+        });
+    } else {
+      setSelectedFlight(null);
+    }
+  }, [includeFlight, travelDate, destination, origin]);
+
+  const basePrice = (destination?.price || 0) * travelers;
+  const flightPrice = selectedFlight ? selectedFlight.price * travelers : 0;
+  const finalPrice = basePrice + flightPrice;
 
   useEffect(() => {
     fetch(`/api/destinations/${id}`)
@@ -67,7 +94,8 @@ export default function DestinationDetailPage() {
       body: JSON.stringify({
         destinationId: id,
         travelers,
-        totalPrice: (destination?.price || 0) * travelers,
+        totalPrice: finalPrice,
+        flightDetails: selectedFlight,
         travelDate,
       }),
     });
@@ -255,14 +283,69 @@ export default function DestinationDetailPage() {
                 </div>
               </div>
 
+              <label className="flex items-center justify-between cursor-pointer mt-5 mb-4 bg-base-100 border border-base-300 p-3.5 rounded-xl hover:border-sky-300 transition-all shadow-sm">
+                <span className="text-sm font-bold flex items-center gap-2"><FaPlane className="text-sky-500 text-lg"/> Need a Flight Ticket?</span>
+                <input type="checkbox" className="toggle toggle-info" checked={includeFlight} onChange={(e) => setIncludeFlight(e.target.checked)} />
+              </label>
+
+              {includeFlight && (
+                <div className="mb-4 bg-base-100 p-4 rounded-xl border border-base-300">
+                  <label className="block text-xs font-bold text-base-content/70 mb-2 uppercase tracking-wide">Departing From</label>
+                  <select 
+                    value={origin} 
+                    onChange={(e) => setOrigin(e.target.value)}
+                    className="select select-bordered w-full focus:outline-none focus:ring-2 focus:ring-sky-500 bg-base-200 text-base-content"
+                  >
+                    {countriesList.map(country => (
+                      <option key={country} value={country}>{country}</option>
+                    ))}
+                  </select>
+                </div>
+              )}
+
+              {includeFlight && !travelDate && (
+                <p className="text-xs text-rose-500 mb-2">Please select a travel date to view available flights.</p>
+              )}
+
+              {includeFlight && travelDate && (
+                <div className="bg-base-100 p-3 rounded-xl border border-base-300 mb-4">
+                  {loadingFlights ? (
+                    <div className="flex justify-center py-4"><span className="loading loading-dots loading-sm text-sky-500"></span></div>
+                  ) : flights.length > 0 ? (
+                    <div className="flex flex-col gap-2">
+                      {flights.map((fl) => (
+                        <label key={fl.id} className={`flex items-center justify-between p-2 rounded-lg cursor-pointer border transition-all ${selectedFlight?.id === fl.id ? 'border-sky-500 bg-sky-50/50 dark:bg-sky-900/20' : 'border-base-200 hover:border-sky-300'}`}>
+                          <div className="flex items-center gap-3">
+                            <input type="radio" name="flight" className="radio radio-info radio-sm" checked={selectedFlight?.id === fl.id} onChange={() => setSelectedFlight(fl)} />
+                            <div className="text-xs">
+                              <p className="font-bold text-base-content">{fl.airline}</p>
+                              <p className="text-base-content/70">{fl.departureTime} - {fl.arrivalTime} ({fl.duration})</p>
+                            </div>
+                          </div>
+                          <span className="font-bold text-sky-600">${fl.price}</span>
+                        </label>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-xs text-base-content/60 text-center">No flights found for this date.</p>
+                  )}
+                </div>
+              )}
+
               <div className="bg-base-100 border border-base-300 rounded-xl p-4 text-sm">
                 <div className="flex justify-between text-base-content/60 mb-1">
-                  <span>${destination.price} × {travelers} person(s)</span>
-                  <span>${destination.price * travelers}</span>
+                  <span>Destination (${destination.price} × {travelers})</span>
+                  <span>${basePrice}</span>
                 </div>
+                {selectedFlight && (
+                  <div className="flex justify-between text-base-content/60 mb-1">
+                    <span>Flight (${selectedFlight.price} × {travelers})</span>
+                    <span>${flightPrice}</span>
+                  </div>
+                )}
                 <div className="flex justify-between font-bold text-base-content border-t border-base-300 pt-2 mt-2">
                   <span>Total</span>
-                  <span className="text-sky-600">${destination.price * travelers}</span>
+                  <span className="text-sky-600">${finalPrice}</span>
                 </div>
               </div>
 

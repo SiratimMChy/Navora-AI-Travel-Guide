@@ -1,4 +1,5 @@
 import { connectDB } from "@/lib/mongoose";
+import "@/models/Destination"; // Ensure Destination schema is registered before populate
 import BookingModel from "@/models/Booking";
 
 export const bookingController = {
