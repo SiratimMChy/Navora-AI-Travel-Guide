@@ -31,7 +31,7 @@ async function getHomeData() {
     ]);
     const avgRating = ratingAgg[0]?.avg ? ratingAgg[0].avg.toFixed(1) : "4.9";
 
-    // Serialize data to plain objects
+
     const serializedReviews = reviews.map((review) => ({
       ...review,
       _id: review._id.toString(),

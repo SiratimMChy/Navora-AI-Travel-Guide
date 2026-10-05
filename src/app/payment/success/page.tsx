@@ -17,7 +17,7 @@ function PaymentSuccessContent() {
     return () => clearTimeout(t);
   }, []);
 
-  // Mark booking as paid on page load, then auto-redirect to dashboard
+
   useEffect(() => {
     if (!bookingId) { setMarking(false); return; }
     fetch(`/api/bookings/${bookingId}`, {
@@ -26,7 +26,7 @@ function PaymentSuccessContent() {
       body: JSON.stringify({ paid: true }),
     }).finally(() => {
       setMarking(false);
-      // Auto redirect after 3 seconds so user sees the success screen
+
       setTimeout(() => {
         router.push("/dashboard?tab=bookings&payment=success");
       }, 3000);

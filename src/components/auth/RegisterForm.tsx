@@ -21,9 +21,10 @@ export const RegisterForm = () => {
   const [alreadyRegistered, setAlreadyRegistered] = useState(false);
 
   const pwRules = [
-    { label: "At least 6 characters", pass: form.password.length >= 6 },
+    { label: "At least 8 characters", pass: form.password.length >= 8 },
     { label: "One uppercase letter", pass: /[A-Z]/.test(form.password) },
     { label: "One lowercase letter", pass: /[a-z]/.test(form.password) },
+    { label: "One number", pass: /[0-9]/.test(form.password) },
   ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

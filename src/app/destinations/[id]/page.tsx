@@ -23,12 +23,11 @@ export default function DestinationDetailPage() {
   const [weatherLoading, setWeatherLoading] = useState(false);
   const [weatherError, setWeatherError] = useState("");
   const [includeFlight, setIncludeFlight] = useState(false);
-  const [origin, setOrigin] = useState("Bangladesh"); // Default origin
+  const [origin, setOrigin] = useState("Bangladesh");
   const [flights, setFlights] = useState<any[]>([]);
   const [loadingFlights, setLoadingFlights] = useState(false);
   const [selectedFlight, setSelectedFlight] = useState<any>(null);
 
-  // Utilizing countriesList from lib
 
   useEffect(() => {
     if (includeFlight && travelDate && destination?.location) {

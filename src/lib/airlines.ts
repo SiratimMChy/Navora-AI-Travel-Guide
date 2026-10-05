@@ -1,5 +1,5 @@
 export const REGION_AIRLINES: Record<string, string[]> = {
-  // Asia - Bangladesh (Highly detailed based on internet data)
+  // Asia - Bangladesh
   "bangladesh dhaka chittagong sylhet": [
     "Biman Bangladesh Airlines", "US-Bangla Airlines", "Air Astra", "Novoair",
     "Emirates", "Qatar Airways", "Saudia", "Etihad Airways", "Flydubai", "Air Arabia",

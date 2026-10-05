@@ -65,14 +65,12 @@ export const flightController = {
         throw new Error("No flight offers returned from Duffel.");
       }
 
-      // Parse and map the top 5 flight offers
       const flights = json.data.offers.slice(0, 5).map((offer: any) => {
         const slice = offer.slices[0];
         const segment = slice.segments[0];
         const price = Math.round(parseFloat(offer.total_amount));
         let airline = offer.owner?.name || "Unknown Airline";
-        
-        // --- PORTFOLIO HACK: Replace "Duffel" with real airline names to make UI look beautiful ---
+
         if (airline.toLowerCase().includes("duffel") || airline === "Unknown Airline") {
           const originLower = origin.toLowerCase();
           const destLower = destination.toLowerCase();
@@ -90,7 +88,6 @@ export const flightController = {
           // Pick a random realistic airline from the aggregated list
           airline = realAirlines[Math.floor(Math.random() * realAirlines.length)];
         }
-        // -----------------------------------------------------------------------------------------
 
         // Format time (e.g. 2026-10-15T12:00:00 -> 12:00)
         const depTime = segment.departing_at.split('T')[1].substring(0, 5);
@@ -109,7 +106,6 @@ export const flightController = {
         };
       });
 
-      // Sort by price
       flights.sort((a: any, b: any) => a.price - b.price);
 
       return flights;
