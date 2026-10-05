@@ -12,6 +12,7 @@
 [![TailwindCSS](https://img.shields.io/badge/Tailwind-4.2.1-06B6D4?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Groq AI](https://img.shields.io/badge/Groq%20AI-Qwen%203.6-FF6B35?style=flat&logo=ai&logoColor=white)](https://groq.com/)
 [![OpenWeatherMap](https://img.shields.io/badge/OpenWeatherMap-API-EB6E4B?style=flat&logo=openweathermap&logoColor=white)](https://openweathermap.org/)
+[![Duffel API](https://img.shields.io/badge/Duffel-Flights%20API-000000?style=flat&logo=airplane&logoColor=white)](https://duffel.com/)
 
 <div align="center">
 
@@ -132,6 +133,7 @@ Unlike traditional travel booking platforms, Navora stands out by:
 
 ### 🌍 Dynamic Destination Pages
 - **Real-Time Weather Widget**: Live current weather and temperature data powered by OpenWeatherMap API
+- **Live Flight Search**: Real-time international flight tracking, duration, and pricing powered by Duffel API
 - **Interactive Image Galleries**: High-performance photo viewers with thumbnail navigation
 - **Streamlined Booking UI**: Modern side-by-side date and traveler selection interface
 
@@ -169,6 +171,7 @@ flowchart TB
         Groq["Groq AI (Qwen 3.6)"]
         OAuth["Google OAuth (Authentication)"]
         Weather["OpenWeatherMap"]
+        Duffel["Duffel API (Flights)"]
     end
 
     UI <-->|HTTP Requests| API
@@ -179,6 +182,7 @@ flowchart TB
     API <-->|Payment Intents| Stripe
     API <-->|AI Prompts| Groq
     UI <-->|Weather Data| Weather
+    API <-->|Flight Offers| Duffel
 ```
 
 ### Data Flow
@@ -228,6 +232,7 @@ flowchart TB
 | **Groq AI** | AI recommendations | Qwen 3.6 27B model for inference |
 | **Google OAuth** | Social authentication | One-click sign-in |
 | **OpenWeatherMap** | Live Weather Data | Real-time weather widget |
+| **Duffel API** | Flight Search | Real-time global flight routes and offers |
 | **MongoDB Atlas** | Cloud database | Managed MongoDB hosting |
 | **Vercel** | Deployment platform | Serverless hosting and CI/CD |
 
@@ -288,6 +293,7 @@ STRIPE_SECRET_KEY=sk_test_...
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
 GROQ_API_KEY=your_groq_api_key
 NEXT_PUBLIC_OPENWEATHER_API_KEY=your_openweathermap_api_key
+DUFFEL_API_KEY=your_duffel_api_key
 ```
 
 4. **Start the development server**
@@ -316,6 +322,7 @@ Navigate to `http://localhost:3000` to see the application running.
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Stripe publishable key | Yes |
 | `GROQ_API_KEY` | Groq AI API key | Yes |
 | `NEXT_PUBLIC_OPENWEATHER_API_KEY` | OpenWeatherMap API key | Yes |
+| `DUFFEL_API_KEY` | Duffel Flights API key | Yes |
 
 ---
 
@@ -582,6 +589,7 @@ Navora is optimized for deployment on Vercel, which provides serverless hosting,
      - `STRIPE_SECRET_KEY`
      - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
      - `GROQ_API_KEY`
+     - `DUFFEL_API_KEY`
 
 4. **Deploy**
    - Click "Deploy"
@@ -653,6 +661,9 @@ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_...
 
 # AI Services
 GROQ_API_KEY=your_groq_api_key
+
+# Flights Services
+DUFFEL_API_KEY=your_duffel_api_key
 
 # Node Environment
 NODE_ENV=production
