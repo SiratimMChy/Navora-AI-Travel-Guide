@@ -8,6 +8,8 @@ import Swal from "sweetalert2";
 import Image from "next/image";
 import Link from "next/link";
 import { countriesList } from "@/lib/countries";
+import { toast } from "react-toastify";
+
 
 export default function DestinationDetailPage() {
   const { id } = useParams();
@@ -24,11 +26,10 @@ export default function DestinationDetailPage() {
   const [weatherError, setWeatherError] = useState("");
   const [includeFlight, setIncludeFlight] = useState(false);
   const [origin, setOrigin] = useState("Bangladesh");
+  const [detectingLocation, setDetectingLocation] = useState(false);
   const [flights, setFlights] = useState<any[]>([]);
   const [loadingFlights, setLoadingFlights] = useState(false);
   const [selectedFlight, setSelectedFlight] = useState<any>(null);
-
-
   useEffect(() => {
     if (includeFlight && travelDate && destination?.location) {
       setLoadingFlights(true);
@@ -65,7 +66,7 @@ export default function DestinationDetailPage() {
         try {
           const apiKey = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
           if (!apiKey) {
-            setWeatherError("API Key missing");
+            setWeatherError("Unavailable");
             setWeatherLoading(false);
             return;
           }
@@ -84,7 +85,7 @@ export default function DestinationDetailPage() {
   }, [destination?.location]);
 
   const handleBook = async () => {
-    if (!session) { Swal.fire("Login Required", "Please login to book a trip.", "info"); return; }
+    if (!session) { Swal.fire("Login Required", "You need to log in to book this amazing trip. Please log in first!", "info"); return; }
     if (!travelDate) { Swal.fire("Select Date", "Please select a travel date.", "warning"); return; }
     setBooking(true);
     const res = await fetch("/api/bookings", {
@@ -100,11 +101,39 @@ export default function DestinationDetailPage() {
     });
     setBooking(false);
     if (res.ok) {
-      Swal.fire("Booked!", "Your trip has been booked successfully.", "success");
+      Swal.fire("Booked!", "Your trip has been booked successfully. Have a great time!", "success");
     } else {
-      Swal.fire("Error", "Booking failed. Please try again.", "error");
+      Swal.fire("Oops!", "We couldn't process your booking right now. Please try again later.", "error");
     }
   };
+
+  const handleDetectLocation = async () => {
+    setDetectingLocation(true);
+    try {
+      const apiUrl = process.env.NEXT_PUBLIC_GEO_API_URL;
+      if (!apiUrl) {
+        toast.error("Live location is temporarily unavailable. Please select your origin from the list.");
+        return;
+      }
+      
+      const res = await fetch(apiUrl);
+      const data = await res.json();
+      
+      if (data.country && countriesList.includes(data.country)) {
+        setOrigin(data.country);
+        toast.success(`We found you! Your location is set to ${data.country}.`);
+      } else if (data.country) {
+        toast.info(`We detected ${data.country}, but we don't have flights from there yet. Please choose from the list.`);
+      } else {
+        toast.error("We couldn't automatically find your location. Please select it manually.");
+      }
+    } catch (error) {
+      toast.error("Oops! Something went wrong while finding your location. Please select it from the list.");
+    } finally {
+      setDetectingLocation(false);
+    }
+  };
+
 
   if (loading) return (
     <div className="min-h-screen flex items-center justify-center bg-base-100">
@@ -237,7 +266,7 @@ export default function DestinationDetailPage() {
               <div className="flex justify-center py-6 relative z-10"><span className="loading loading-spinner loading-md text-white" /></div>
             ) : weatherError ? (
               <div className="text-sm bg-white/20 p-4 rounded-xl text-center relative z-10 font-medium border border-white/20">
-                {weatherError === "API Key missing" ? "Please add NEXT_PUBLIC_OPENWEATHER_API_KEY in .env" : "Weather data currently unavailable"}
+                Weather data is temporarily unavailable.
               </div>
             ) : weather ? (
               <div className="relative z-10">
@@ -289,7 +318,18 @@ export default function DestinationDetailPage() {
 
               {includeFlight && (
                 <div className="mb-4 bg-base-100 p-4 rounded-xl border border-base-300">
-                  <label className="block text-xs font-bold text-base-content/70 mb-2 uppercase tracking-wide">Departing From</label>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="block text-xs font-bold text-base-content/70 uppercase tracking-wide">Departing From</label>
+                    <button 
+                      type="button" 
+                      onClick={handleDetectLocation}
+                      disabled={detectingLocation}
+                      className="text-xs text-sky-500 hover:text-sky-600 font-semibold flex items-center gap-1 transition-colors"
+                    >
+                      {detectingLocation ? <span className="loading loading-spinner loading-xs"></span> : <FaMapMarkerAlt />}
+                      {detectingLocation ? "Detecting..." : "Live Location"}
+                    </button>
+                  </div>
                   <select 
                     value={origin} 
                     onChange={(e) => setOrigin(e.target.value)}

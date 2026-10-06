@@ -41,10 +41,10 @@ const LoginForm = () => {
     setLoading(true);
     const result = await signIn("credentials", { email: form.email, password: form.password, redirect: false, callbackUrl: callback });
     if (result?.error) {
-      toast.error("Incorrect email or password.");
+      toast.error("The email or password you entered is incorrect. Please try again.");
       setErrors({ ...errors, password: "Incorrect email or password." });
     } else {
-      toast.success("Successfully logged in!");
+      toast.success("Welcome back! You are successfully logged in!");
       router.push(callback);
     }
     setLoading(false);

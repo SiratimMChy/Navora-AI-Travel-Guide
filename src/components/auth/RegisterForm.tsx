@@ -54,19 +54,19 @@ export const RegisterForm = () => {
       toast.success("Account created successfully!");
       const signInResult = await signIn("credentials", { email: form.email, password: form.password, redirect: false, callbackUrl });
       if (signInResult?.error) {
-        toast.error("Account created but login failed.");
+        toast.error("Welcome! Your account is ready, but we couldn't log you in automatically. Please log in manually.");
         setErrors({ ...errors, email: "Account created but login failed. Try logging in." });
       } else {
-        toast.success("Successfully logged in!");
+        toast.success("Welcome aboard! You are successfully logged in!");
         router.push(callbackUrl);
       }
     } else {
       const msg: string = result.error || "";
       if (msg.toLowerCase().includes("already") || msg.toLowerCase().includes("exists")) {
-        toast.error("This email is already registered.");
+        toast.error("Looks like an account with this email already exists. Try logging in!");
         setAlreadyRegistered(true);
       } else {
-        toast.error(msg || "Registration failed. Please try again.");
+        toast.error("We couldn't create your account right now. Please try again in a moment.");
         setErrors({ ...errors, email: msg || "Registration failed. Please try again." });
       }
     }

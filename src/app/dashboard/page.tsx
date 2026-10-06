@@ -51,9 +51,9 @@ function DashboardContent() {
       });
       const data = await res.json();
       if (data.url) window.location.href = data.url;
-      else Swal.fire("Payment Error", data.error || "Could not initiate payment.", "error");
+      else Swal.fire("Payment Error", "We couldn't start the payment process. Please try again.", "error");
     } catch {
-      Swal.fire("Error", "Payment failed. Try again.", "error");
+      Swal.fire("Payment Failed", "Something went wrong with the payment. Please give it another try.", "error");
     }
     setPayingId(null);
   };

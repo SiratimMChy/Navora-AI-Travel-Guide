@@ -51,7 +51,7 @@ export default function ProfileTab() {
       if (file) {
         const imgbbKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY;
         if (!imgbbKey || imgbbKey === "your_imgbb_api_key_here") {
-          toast.error("ImgBB API key not configured.");
+          toast.error("Image upload is temporarily unavailable.");
         } else {
           const base64 = await toBase64(file);
           const fd = new FormData();

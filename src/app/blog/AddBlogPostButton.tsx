@@ -31,7 +31,7 @@ export default function AddBlogPostButton() {
     if (data.success) {
       setForm((prev) => ({ ...prev, image: data.data.url }));
     } else {
-      Swal.fire("Upload failed", "Could not upload image.", "error");
+      Swal.fire("Upload Failed", "We couldn't upload your image right now. Please try again.", "error");
       setPreview("");
     }
   };
@@ -50,9 +50,9 @@ export default function AddBlogPostButton() {
       setOpen(false);
       setForm({ title: "", excerpt: "", content: "", image: "", category: "", readTime: "5 min read" });
       setPreview("");
-      Swal.fire("Published!", "Your blog post is live.", "success").then(() => router.refresh());
+      Swal.fire("Published!", "Your amazing blog post is now live for everyone to read!", "success").then(() => router.refresh());
     } else {
-      Swal.fire("Error", "Failed to publish post.", "error");
+      Swal.fire("Oops!", "We couldn't publish your post right now. Please save your work and try again later.", "error");
     }
   };
 
