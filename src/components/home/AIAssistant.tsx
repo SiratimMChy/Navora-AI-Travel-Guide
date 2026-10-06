@@ -1,14 +1,10 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import { FaRobot, FaTimes, FaComments, FaStar, FaMapMarkerAlt, FaPaperPlane } from "react-icons/fa";
+import { FaRobot, FaTimes, FaComments } from "react-icons/fa";
 import { Destination } from "@/types";
-import Link from "next/link";
-import Image from "next/image";
-type Message = {
-  role: "bot" | "user";
-  text?: string;
-  recommendations?: Destination[];
-};
+import ChatMessageItem, { Message } from "./ChatMessageItem";
+import ChatQuickReplies from "./ChatQuickReplies";
+
 
 const CATEGORIES = ["beach", "mountain", "city", "adventure", "cruise"];
 const BUDGETS = [500, 1000, 2000, 5000];
@@ -120,46 +116,7 @@ export default function AIAssistant() {
           {/* Messages */}
           <div className="flex-1 overflow-y-auto p-4 space-y-3 min-h-0">
             {messages.map((msg, i) => (
-              <div key={i}>
-                {msg.text && (
-                  <div className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-                    {msg.role === "bot" && (
-                      <div className="w-6 h-6 rounded-full bg-sky-500/20 flex items-center justify-center mr-2 mt-1 shrink-0">
-                        <FaRobot size={11} className="text-sky-500" />
-                      </div>
-                    )}
-                    <div className={`max-w-[75%] px-3 py-2 rounded-2xl text-sm leading-relaxed ${
-                      msg.role === "user"
-                        ? "bg-sky-500 text-white rounded-br-sm"
-                        : "bg-base-200 text-base-content rounded-bl-sm"
-                    }`}>
-                      {msg.text}
-                    </div>
-                  </div>
-                )}
-                {msg.recommendations && (
-                  <div className="space-y-2 mt-1">
-                    {msg.recommendations.map((dest) => (
-                      <Link key={dest._id} href={`/destinations/${dest._id}`} onClick={() => setOpen(false)}
-                        className="flex items-center gap-3 p-2.5 rounded-xl bg-base-200 hover:bg-base-300 transition-colors border border-base-300 group">
-                        <Image src={dest.image} alt={dest.title} width={56} height={48} className="w-14 h-12 rounded-lg object-cover shrink-0" />
-                        <div className="min-w-0">
-                          <p className="font-semibold text-base-content text-sm truncate group-hover:text-sky-500 transition-colors">{dest.title}</p>
-                          <p className="text-base-content/50 text-xs flex items-center gap-1">
-                            <FaMapMarkerAlt size={9} className="text-sky-500" />{dest.location}
-                          </p>
-                          <div className="flex items-center gap-2 mt-0.5">
-                            <span className="text-sky-500 text-xs font-bold">${dest.price}/person</span>
-                            <span className="flex items-center gap-0.5 text-xs text-yellow-500">
-                              <FaStar size={9} />{dest.rating}
-                            </span>
-                          </div>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
+              <ChatMessageItem key={i} msg={msg} setOpen={setOpen} />
             ))}
 
             {/* Typing indicator */}
@@ -184,41 +141,16 @@ export default function AIAssistant() {
           </div>
 
           {/* Quick reply buttons */}
-          {!loading && (
-            <div className="px-4 pb-4 shrink-0 space-y-2">
-              {step === 1 && (
-                <div className="grid grid-cols-3 gap-1.5">
-                  {CATEGORIES.map((cat) => (
-                    <button key={cat} onClick={() => handleCategory(cat)}
-                      className="btn btn-xs btn-outline capitalize hover:bg-gradient-to-r hover:from-blue-600 hover:to-cyan-500 hover:text-white hover:border-transparent transition-all">
-                      {cat}
-                    </button>
-                  ))}
-                  <button onClick={() => handleCategory("")} className="btn btn-xs btn-ghost col-span-3 text-base-content/50">
-                    Any destination
-                  </button>
-                </div>
-              )}
-
-              {step === 2 && (
-                <div className="grid grid-cols-2 gap-1.5">
-                  {BUDGETS.map((b) => (
-                    <button key={b} onClick={() => handleBudget(b)}
-                      className={`btn btn-xs ${prefs.budget === b ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white border-none" : "btn-outline"}`}>
-                      ${b}
-                    </button>
-                  ))}
-                </div>
-              )}
-
-              {step === 4 && (
-                <button onClick={reset}
-                  className="w-full btn btn-sm btn-outline gap-2">
-                  <FaPaperPlane size={12} /> Start New Search
-                </button>
-              )}
-            </div>
-          )}
+          <ChatQuickReplies
+            step={step}
+            loading={loading}
+            prefs={prefs}
+            CATEGORIES={CATEGORIES}
+            BUDGETS={BUDGETS}
+            handleCategory={handleCategory}
+            handleBudget={handleBudget}
+            reset={reset}
+          />
         </div>
       )}
     </>

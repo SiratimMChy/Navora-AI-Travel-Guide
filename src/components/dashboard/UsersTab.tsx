@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
+import UserRoleModal from "./UserRoleModal";
 
 type User = {
   _id: string;
@@ -238,44 +239,12 @@ export default function UsersTab({ users, setUsers, loading }: Props) {
         </>
       )}
 
-      {/* Role edit modal */}
-      <dialog id="role_modal" className="modal">
-        <div className="modal-box max-w-sm bg-base-100">
-          <form method="dialog">
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-          </form>
-          {selectedUser && (
-            <form onSubmit={handleRoleUpdate}>
-              <h3 className="text-center font-bold text-lg mb-4 text-base-content">Edit User Role</h3>
-              <div className="flex flex-col gap-3">
-                <div>
-                  <label className="label"><span className="label-text">Name</span></label>
-                  <input readOnly value={selectedUser.name} className="input input-bordered w-full bg-base-200" />
-                </div>
-                <div>
-                  <label className="label"><span className="label-text">Email</span></label>
-                  <input readOnly value={selectedUser.email} className="input input-bordered w-full bg-base-200" />
-                </div>
-                <div>
-                  <label className="label"><span className="label-text">Role</span></label>
-                  <select
-                    value={editRole}
-                    onChange={(e) => setEditRole(e.target.value)}
-                    className="select select-bordered w-full bg-base-200"
-                    required
-                  >
-                    <option value="user">user</option>
-                    <option value="admin">admin</option>
-                  </select>
-                </div>
-                <button type="submit" className="btn text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-sky-600 hover:to-teal-600 border-none w-full mt-2">
-                  Update Role
-                </button>
-              </div>
-            </form>
-          )}
-        </div>
-      </dialog>
+      <UserRoleModal
+        selectedUser={selectedUser}
+        editRole={editRole}
+        setEditRole={setEditRole}
+        handleRoleUpdate={handleRoleUpdate}
+      />
     </div>
   );
 }
