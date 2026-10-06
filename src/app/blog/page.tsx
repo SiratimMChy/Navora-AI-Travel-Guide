@@ -5,6 +5,7 @@ import { BlogPost } from "@/types";
 import AddBlogPostButton from "./AddBlogPostButton";
 import Image from "next/image";
 import Link from "next/link";
+import PageBanner from "@/components/ui/PageBanner";
 
 async function getPosts(): Promise<BlogPost[]> {
   try {
@@ -23,15 +24,14 @@ export default async function BlogPage() {
 
   return (
     <div className="min-h-screen bg-base-100">
-      <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white py-10 sm:py-16 px-4 text-center relative">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3">Travel Blog</h1>
-        <p className="text-sky-100 text-base sm:text-lg">Inspiration, tips, and guides for every kind of traveler</p>
-        <div className="mt-5">
-          <AddBlogPostButton />
-        </div>
-      </div>
+      <PageBanner 
+        title="Travel Blog"
+        description="Inspiration, tips, and guides for every kind of traveler"
+      >
+        <AddBlogPostButton />
+      </PageBanner>
 
-      <div className="max-w-6xl mx-auto px-4 py-12">
+      <div className="max-w-7xl mx-auto px-4 py-12">
         {posts.length === 0 ? (
           <div className="text-center py-20 text-base-content/40">
             <p className="text-6xl mb-4">📝</p>

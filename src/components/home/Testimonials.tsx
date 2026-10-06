@@ -14,7 +14,7 @@ export default function Testimonials({ reviews }: { reviews: Review[] }) {
 
   return (
     <section className="py-20 px-4 lg:px-0 bg-base-200">
-      <div className="w-full lg:w-11/12 mx-auto">
+      <div className="max-w-7xl mx-auto px-4">
 
         {/* Header */}
         <div className="text-center mb-12">

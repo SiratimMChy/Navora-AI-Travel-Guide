@@ -84,12 +84,13 @@ export default function Navbar() {
 
   return (
     <div className="sticky top-0 z-50 bg-base-100/95 backdrop-blur shadow-sm">
-      <div className="navbar py-0 max-h-16 w-full lg:w-11/12 mx-auto lg:px-0">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="navbar p-0 min-h-16 w-full">
 
         {/* Navbar Start — mobile dropdown + logo */}
         <div className="navbar-start">
-          <div className="dropdown relative">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden -ml-3">
+          <div className="dropdown relative lg:hidden">
+            <div tabIndex={0} role="button" className="btn btn-ghost -ml-3">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h8m-8 6h16" />
               </svg>
@@ -104,7 +105,7 @@ export default function Navbar() {
               </li>
             </ul>
           </div>
-          <Link href="/" className="text-2xl font-lobster font-bold ml-1 bg-linear-to-r from-sky-500 to-teal-400 bg-clip-text text-transparent">
+          <Link href="/" className="text-2xl font-lobster font-bold lg:-ml-1 bg-linear-to-r from-sky-500 to-teal-400 bg-clip-text text-transparent">
             Navora
           </Link>
         </div>
@@ -177,6 +178,7 @@ export default function Navbar() {
           )}
         </div>
 
+      </div>
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { FaSearch, FaStar, FaMapMarkerAlt, FaChevronDown } from "react-icons/fa";
 import { Destination } from "@/types";
+import PageBanner from "@/components/ui/PageBanner";
 import Link from "next/link";
 import { Suspense } from "react";
 import { getCategoryGradient } from "@/lib/categoryColors";
@@ -46,10 +47,10 @@ function ExploreContent() {
 
   return (
     <div className="min-h-screen bg-base-100">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white py-10 sm:py-16 px-4 text-center">        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3">Explore Destinations</h1>
-        <p className="text-sky-100 text-base sm:text-lg">Discover {total}+ amazing places around the world</p>
-      </div>
+      <PageBanner 
+        title="Explore Destinations"
+        description={`Discover ${total}+ amazing places around the world`}
+      />
 
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Filters */}
@@ -113,10 +114,10 @@ function ExploreContent() {
               <button
                 key={c}
                 onClick={() => { setCategory(c); setPage(1); }}
-                className={`shrink-0 px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
+                className={`shrink-0 px-5 py-2.5 rounded-full text-sm font-semibold transition-all border ${
                   category === c 
-                    ? "bg-sky-500 text-white shadow-sm" 
-                    : "bg-base-100 text-base-content hover:bg-base-200 border border-base-300"
+                    ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white border-transparent shadow-md" 
+                    : "bg-base-100 text-base-content hover:bg-base-200 border-base-300 hover:border-sky-300"
                 }`}
               >
                 {c ? c.charAt(0).toUpperCase() + c.slice(1) : "All Destinations"}

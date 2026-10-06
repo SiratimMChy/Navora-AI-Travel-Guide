@@ -54,7 +54,7 @@ const slides = [
 
 export default function Hero() {
   return (
-    <div className="w-full px-2 lg:px-0 lg:w-11/12 mx-auto pt-0.5 pb-4">
+    <div className="max-w-7xl mx-auto px-4 pt-0.5 pb-4">
       <Swiper
         navigation
         pagination={{ clickable: true }}

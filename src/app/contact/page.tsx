@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
+import PageBanner from "@/components/ui/PageBanner";
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
@@ -14,12 +15,12 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-base-100">
-      <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white py-16 px-4 text-center">
-        <h1 className="text-5xl font-bold mb-3">Contact Us</h1>
-        <p className="text-sky-100 text-lg">We&apos;d love to hear from you. Send us a message!</p>
-      </div>
+      <PageBanner 
+        title="Contact Us"
+        description="We'd love to hear from you. Send us a message!"
+      />
 
-      <div className="max-w-6xl mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-3 gap-10">
+      <div className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-3 gap-10">
         {/* Info */}
         <div className="space-y-6">
           {[

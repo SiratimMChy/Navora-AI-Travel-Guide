@@ -10,7 +10,7 @@ export default function Footer() {
   return (
     <>
       <div className="py-10 px-4 lg:px-0" style={{ backgroundColor: "#111827", color: "#fff" }}>
-        <footer className="footer sm:footer-horizontal w-full lg:w-11/12 mx-auto">
+        <footer className="footer sm:footer-horizontal max-w-7xl mx-auto px-4">
           {/* Brand */}
           <aside>
           <Link href="/" className="text-3xl font-lobster font-bold bg-linear-to-r from-sky-400 to-teal-400 bg-clip-text text-transparent">

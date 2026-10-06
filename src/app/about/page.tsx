@@ -1,5 +1,6 @@
 import { FaRobot, FaGlobe, FaUsers, FaAward, FaChartLine, FaShieldAlt, FaHeart, FaLightbulb } from "react-icons/fa";
 import Link from "next/link";
+import PageBanner from "@/components/ui/PageBanner";
 
 export const metadata = {
   title: "About Navora - AI-Powered Travel Platform",
@@ -11,21 +12,18 @@ export default function AboutPage() {
     <div className="min-h-screen bg-gradient-to-b from-base-100 to-base-200">
       
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white py-24 px-4">
-        <div className="max-w-5xl mx-auto text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm mb-6">
-            <FaGlobe size={36} />
-          </div>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">About Navora</h1>
-          <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
-            Revolutionizing travel planning through AI-powered personalization, making dream destinations accessible to everyone.
-          </p>
+      <PageBanner 
+        title="About Navora"
+        description="Revolutionizing travel planning through AI-powered personalization, making dream destinations accessible to everyone."
+      >
+        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-sky-500/10 dark:bg-sky-500/20 text-sky-500 mt-2">
+          <FaGlobe size={36} />
         </div>
-      </div>
+      </PageBanner>
 
       {/* Mission Statement */}
       <section className="py-20 px-4">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950 dark:to-cyan-950 rounded-3xl p-10 md:p-16 shadow-xl border border-blue-200 dark:border-blue-800 text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-base-content mb-6">Our Mission</h2>
             <p className="text-lg md:text-xl text-base-content/80 leading-relaxed">
@@ -37,7 +35,7 @@ export default function AboutPage() {
 
       {/* Our Story */}
       <section className="py-16 px-4">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="bg-base-100 rounded-3xl p-10 md:p-12 shadow-lg border border-base-300">
             <h2 className="text-3xl md:text-4xl font-bold text-base-content mb-8 text-center">Our Story</h2>
             <div className="space-y-6 text-base-content/70 text-lg leading-relaxed">
@@ -57,7 +55,7 @@ export default function AboutPage() {
 
       {/* Key Features */}
       <section className="py-16 px-4 bg-gradient-to-r from-blue-600 to-cyan-600">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">Platform Features</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
@@ -77,7 +75,7 @@ export default function AboutPage() {
 
       {/* Core Values */}
       <section className="py-20 px-4">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-base-content text-center mb-4">Our Core Values</h2>
           <p className="text-center text-base-content/60 mb-12 max-w-2xl mx-auto">
             These principles guide every decision we make and shape the experience we deliver to our travelers.
@@ -123,7 +121,7 @@ export default function AboutPage() {
 
       {/* What Sets Us Apart */}
       <section className="py-16 px-4 bg-base-200">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-base-content text-center mb-12">What Sets Us Apart</h2>
           <div className="grid md:grid-cols-2 gap-8">
             {[
@@ -168,7 +166,7 @@ export default function AboutPage() {
 
       {/* Call to Action */}
       <section className="py-20 px-4 bg-gradient-to-r from-blue-600 to-cyan-600">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Ready to Start Your Journey?</h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
             Join thousands of travelers who have discovered their dream destinations with Navora&apos;s AI-powered platform.

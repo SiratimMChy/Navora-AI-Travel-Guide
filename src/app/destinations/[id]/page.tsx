@@ -94,7 +94,7 @@ export default function DestinationDetailPage() {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left: Details — full width for admin */}
         <div className={`${isAdmin ? "lg:col-span-3" : "lg:col-span-2"} space-y-6`}>
 

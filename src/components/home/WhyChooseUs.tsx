@@ -10,7 +10,7 @@ export default function WhyChooseUs({ destCount }: { destCount: number }) {
 
   return (
     <section className="py-16 px-4 lg:px-0 bg-base-200">
-      <div className="w-full lg:w-11/12 mx-auto">
+      <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-8 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-base-content mb-3">Why Choose Navora?</h2>
           <p className="text-base-content/60 text-base sm:text-lg">We make travel planning effortless and unforgettable</p>
