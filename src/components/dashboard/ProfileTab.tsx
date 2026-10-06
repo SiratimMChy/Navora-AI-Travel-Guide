@@ -73,10 +73,10 @@ export default function ProfileTab() {
       setIsEditing(false);
       setPreview(null);
       if (fileRef.current) fileRef.current.value = "";
-      toast.success("Profile updated successfully!");
+      toast.success("Your profile has been updated successfully!");
     } catch (err) {
       console.error(err);
-      toast.error("Failed to update profile.");
+      toast.error("We couldn't save your profile changes. Please try again.");
     } finally {
       setUploading(false);
     }

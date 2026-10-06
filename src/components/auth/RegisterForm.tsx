@@ -51,7 +51,7 @@ export const RegisterForm = () => {
     setLoading(true);
     const result = await postUser(form);
     if (result.acknowledged) {
-      toast.success("Account created successfully!");
+      toast.success("Your account has been created successfully!");
       const signInResult = await signIn("credentials", { email: form.email, password: form.password, redirect: false, callbackUrl });
       if (signInResult?.error) {
         toast.error("Welcome! Your account is ready, but we couldn't log you in automatically. Please log in manually.");
