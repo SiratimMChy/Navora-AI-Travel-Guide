@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
-import { FaSearch, FaStar, FaMapMarkerAlt, FaFilter } from "react-icons/fa";
+import { FaSearch, FaStar, FaMapMarkerAlt, FaChevronDown } from "react-icons/fa";
 import { Destination } from "@/types";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -53,31 +53,76 @@ function ExploreContent() {
 
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Filters */}
-        <div className="bg-base-200 border border-base-300 rounded-2xl shadow-md p-5 mb-8 flex flex-col md:flex-row gap-4">
-          <div className="relative flex-1">
-            <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-base-content/40" />
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-              placeholder="Search destinations..."
-              className="w-full pl-11 pr-4 py-3 border border-base-300 rounded-xl outline-none focus:ring-2 focus:ring-sky-500 bg-base-100 text-base-content"
-            />
+        <div className="flex flex-col gap-6 mb-8">
+          {/* Top row: Search Bar & Sort */}
+          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+            {/* Search Bar */}
+            <div className="relative w-full md:max-w-xl">
+              <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+                <FaSearch className="text-sky-500 text-lg" />
+              </div>
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+                placeholder="Where do you want to go?"
+                className="w-full pl-14 pr-6 py-3.5 bg-base-100 border border-base-300 rounded-full text-base-content placeholder-base-content/40 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 transition-all text-base"
+              />
+            </div>
+            
+            {/* Mobile Category & Sort row */}
+            <div className="flex gap-3 w-full md:w-auto">
+              {/* Category Dropdown (Mobile Only) */}
+              <div className="relative w-1/2 md:hidden group">
+                <select 
+                  value={category} 
+                  onChange={(e) => { setCategory(e.target.value); setPage(1); }}
+                  className="w-full appearance-none pl-4 pr-9 py-3.5 bg-base-100 border border-base-300 rounded-full text-base-content focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 transition-all font-medium cursor-pointer text-sm"
+                >
+                  {categories.map((c) => (
+                    <option key={c} value={c}>{c ? c.charAt(0).toUpperCase() + c.slice(1) : "Categories"}</option>
+                  ))}
+                </select>
+                <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                  <FaChevronDown className="text-sky-500 group-hover:text-sky-600 transition-colors text-sm" />
+                </div>
+              </div>
+
+              {/* Sort Dropdown */}
+              <div className="relative w-1/2 md:w-auto group">
+                <select 
+                  value={sort} 
+                  onChange={(e) => { setSort(e.target.value); setPage(1); }}
+                  className="w-full md:w-56 appearance-none pl-4 pr-9 md:pl-5 md:pr-10 py-3.5 bg-base-100 border border-base-300 rounded-full text-base-content focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 transition-all font-medium cursor-pointer text-sm"
+                >
+                  <option value="">Sort by</option>
+                  <option value="price_asc">Lowest Price</option>
+                  <option value="price_desc">Highest Price</option>
+                  <option value="rating">Top Rated</option>
+                </select>
+                <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                  <FaChevronDown className="text-sky-500 group-hover:text-sky-600 transition-colors text-sm" />
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="flex items-center gap-2 w-full md:w-auto">
-            <FaFilter className="text-base-content/40 shrink-0" />
-            <select value={category} onChange={(e) => { setCategory(e.target.value); setPage(1); }}
-              className="flex-1 px-4 py-3 border border-base-300 rounded-xl outline-none focus:ring-2 focus:ring-sky-500 bg-base-100 text-base-content capitalize">
-              {categories.map((c) => <option key={c} value={c}>{c || "All Categories"}</option>)}
-            </select>
+
+          {/* Category Pills (Desktop Only) */}
+          <div className="hidden md:flex items-center gap-2 overflow-x-auto pb-4 pt-1 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0">
+            {categories.map((c) => (
+              <button
+                key={c}
+                onClick={() => { setCategory(c); setPage(1); }}
+                className={`shrink-0 px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
+                  category === c 
+                    ? "bg-sky-500 text-white shadow-sm" 
+                    : "bg-base-100 text-base-content hover:bg-base-200 border border-base-300"
+                }`}
+              >
+                {c ? c.charAt(0).toUpperCase() + c.slice(1) : "All Destinations"}
+              </button>
+            ))}
           </div>
-          <select value={sort} onChange={(e) => { setSort(e.target.value); setPage(1); }}
-            className="w-full md:w-auto px-4 py-3 border border-base-300 rounded-xl outline-none focus:ring-2 focus:ring-sky-500 bg-base-100 text-base-content">
-            <option value="">Sort: Default</option>
-            <option value="price_asc">Price: Low to High</option>
-            <option value="price_desc">Price: High to Low</option>
-            <option value="rating">Highest Rated</option>
-          </select>
         </div>
 
         {/* Results */}
